@@ -1,5 +1,5 @@
 public class IntroActividad1 {
-    public static void main(String[] args)  {     
+    public static void intro() {     
         String nombre = "David";
         boolean bandera = true;
         char caracter = '&';
