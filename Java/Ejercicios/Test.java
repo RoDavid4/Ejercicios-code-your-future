@@ -1,11 +1,12 @@
 package Java.Ejercicios;
 
-import Java.Ejercicios.IntroClases.*;
 import java.util.Scanner;
+
+import Java.Ejercicios.IntroClases.IntegradoraII;
 
 public class Test {
 
     public static void main(String[] args) {
-        ClaseMath.genAnSQRT();
+        IntegradoraII.validContra2();
     }
 }
