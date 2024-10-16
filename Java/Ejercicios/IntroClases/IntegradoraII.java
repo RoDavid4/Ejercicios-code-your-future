@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class IntegradoraII {
 
-    public static void convUnidades() {
+    public void convUnidades() {
         /*
          * Actividad: Conversión de unidades de temperatura
          * Escribe un programa que cumpla con las siguientes condiciones:
