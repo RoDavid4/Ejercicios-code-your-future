@@ -1,7 +1,6 @@
 package Java.Ejercicios.EstructurasDeControl;
 
 import java.util.Scanner;
-import java.io.IOException;
 import java.util.InputMismatchException;
 
 public class Condicionales3BloqueTryCatch {
