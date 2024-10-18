@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class IntegradoraII {
 
-    public void convUnidades() {
+    public static void convUnidades() {
         /*
          * Actividad: Conversión de unidades de temperatura
          * Escribe un programa que cumpla con las siguientes condiciones:
@@ -24,7 +24,7 @@ public class IntegradoraII {
          * 
          * Si ingresa una temperatura no válida, mostrará un mensaje de error.
          */
-
+        System.out.println("\033\143");
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Ingrese la témperatura: ");
             double temp = sc.nextDouble();
