@@ -1,5 +1,6 @@
-import java.util.Scanner;
+package Java.Ejercicios.Introductorios;
 
+import java.util.Scanner;
 
 public class IntroAClaseScannerYOperadoresEnJava { 
     public static void nombreYEdad() {

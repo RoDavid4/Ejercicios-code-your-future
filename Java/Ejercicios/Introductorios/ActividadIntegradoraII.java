@@ -1,3 +1,5 @@
+package Java.Ejercicios.Introductorios;
+
 import java.util.Scanner;
 
 public class ActividadIntegradoraII {

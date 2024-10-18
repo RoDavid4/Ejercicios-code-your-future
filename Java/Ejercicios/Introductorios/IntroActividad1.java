@@ -1,3 +1,5 @@
+package Java.Ejercicios.Introductorios;
+
 public class IntroActividad1 {
     public static void intro() {     
         String nombre = "David";
