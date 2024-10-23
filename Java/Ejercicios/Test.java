@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class Test {
 
     public static void main(String[] args) {
-        BuclesI.contarOcurr();
+       
+       BuclesII.contParImpar();
+       BuclesII.adivNum();
     }
 }
