@@ -80,7 +80,7 @@ public class IntegradoraII {
 
     public static void validContra2() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("\033\143");
+        
         System.out.println("Ingresa una contraseña: ");
         String pw = sc.next();
         boolean correcta = true;

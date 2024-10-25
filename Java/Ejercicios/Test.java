@@ -1,12 +1,12 @@
 package Java.Ejercicios;
-import Java.Ejercicios.Introductorios.*;
 
+import Java.Ejercicios.IntroClases.*;
+import java.util.Arrays;
 import java.util.Scanner;
-
 
 public class Test {
 
     public static void main(String[] args) {
-        
+        Wrappers.sumaNum();
     }
 }
