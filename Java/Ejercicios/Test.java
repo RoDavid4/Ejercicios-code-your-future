@@ -7,6 +7,6 @@ import java.util.Scanner;
 public class Test {
 
     public static void main(String[] args) {
-        ClaseArrays.ejComp();
+        Wrappers.sumaNum();
     }
 }
