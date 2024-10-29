@@ -2,7 +2,6 @@ package Java.Ejercicios.EstructurasIterativas;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
 public class BuclesII {
 
     public static void menuWhile() {
