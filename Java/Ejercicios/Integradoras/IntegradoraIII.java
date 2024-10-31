@@ -187,7 +187,7 @@ public class IntegradoraIII {
          */
         System.out.println("\033\143");
         Scanner sc = new Scanner(System.in);
-        int num, i; 
+        int num, i;
         boolean primo;
         do {
             primo = true;
@@ -199,18 +199,18 @@ public class IntegradoraIII {
                 System.out.println("El número no es primo");
                 primo = false;
             } else {
-                i=2;
-            while (i < num && primo == true) {
-                if (num % i == 0) {
-                    System.out.println("El número no es primo");
-                    primo = false;
+                i = 2;
+                while (i < num && primo == true) {
+                    if (num % i == 0) {
+                        System.out.println("El número no es primo");
+                        primo = false;
+                    }
+                    i++;
                 }
-                i++;
+                if (primo == true) {
+                    System.out.println("El número es primo, el programa ha finalizado");
+                }
             }
-            if (primo == true) {
-                System.out.println("El número es primo, el programa ha finalizado");
-            }
-        }
         } while (num != 0 && primo == false);
         sc.close();
     }

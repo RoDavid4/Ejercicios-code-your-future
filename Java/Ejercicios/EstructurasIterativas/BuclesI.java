@@ -222,6 +222,6 @@ public class BuclesI {
             System.out.println("El caracter '" + caracter + "' no aparece en la frase.");
         }
         sc.close();
-        //es case sensitive
+        // es case sensitive
     }
 }

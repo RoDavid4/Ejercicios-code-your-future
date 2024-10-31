@@ -7,7 +7,7 @@ public class ClaseString {
         Scanner almacenador = new java.util.Scanner(System.in);
 
         // ✏️ Actividad: Longitud de Cadena
-        
+
         System.out.println("Ingrese una cadena para saber su longitud");
         String cadena = almacenador.nextLine();
         int longitudCadena = cadena.length();

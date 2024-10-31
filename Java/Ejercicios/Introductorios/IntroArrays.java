@@ -1,7 +1,6 @@
 package Java.Ejercicios.Introductorios;
 
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class IntroArrays {
 
@@ -153,6 +152,7 @@ public class IntroArrays {
         System.out.println("El arreglo inicial era: [" + arr[0] + ", " + arr[1] + ", " + arr[2] + "]");
         System.out.println("El arreglo modificado es: [" + arr2[0] + ", " + arr2[1] + ", " +
                 arr2[2] + ", " + arr2[3] + ", " + arr2[4] + "]");
+        sc.close();
     }
 
     public static void RNGCantPares() {
@@ -171,6 +171,7 @@ public class IntroArrays {
         int min = sc.nextInt();
         System.out.println("ingrese cota superior");
         int max = sc.nextInt(); // Math.random() * (max - min) + min;
+        sc.close();
         arr[0] = (int) (Math.random() * (max - min) + min);
         arr[1] = (int) (Math.random() * (max - min) + min);
         arr[2] = (int) (Math.random() * (max - min) + min);
@@ -221,6 +222,7 @@ public class IntroArrays {
         arr[2] = sc.nextInt();
         arr[3] = sc.nextInt();
         arr[4] = sc.nextInt();
+        sc.close();
         int suma = arr[0] + arr[1] + arr[2] + arr[3] + arr[4];
         System.out.println("La suma de los elementos en posiciones pares es: " + suma);
 
@@ -242,6 +244,7 @@ public class IntroArrays {
         nom[1] = sc.nextLine();
         nom[2] = sc.nextLine();
         nom[3] = sc.nextLine();
+        sc.close();
         String[] ord = new String[4];
         String min = nom[0];
         int pos = 0;
