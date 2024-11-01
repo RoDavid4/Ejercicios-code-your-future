@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class IntegradoraV {
-
+ 
     public static void manipOrac() {
         /*
          * Actividad: Manipulando oraciones
@@ -63,7 +63,7 @@ public class IntegradoraV {
         scn.close();
     }
 
-    public static void mostrarMenu(String oracion, Scanner scn) {
+    private static void mostrarMenu(String oracion, Scanner scn) {
         char eleccion;
         do {
             System.out.println("\033\143");
@@ -85,7 +85,7 @@ public class IntegradoraV {
         } while (eleccion != '9');
     }
 
-    public static String ejecutarEleccion(String oracion, char opcion, Scanner scn) {
+    private static String ejecutarEleccion(String oracion, char opcion, Scanner scn) {
         switch (opcion) {
             case '1':
                 oracion = crearOBorrar(oracion, scn);
@@ -131,7 +131,7 @@ public class IntegradoraV {
         return oracion;
     }
 
-    public static String crearOBorrar(String oracion, Scanner scn) {
+    private static String crearOBorrar(String oracion, Scanner scn) {
         if (oracion.length() == 0) {
             System.out.print("Ingrese una nueva oración: ");
             oracion = scn.nextLine();
@@ -150,18 +150,18 @@ public class IntegradoraV {
         return oracion;
     }
 
-    public static void mostrarCantidadCaracteres(String oracion, Scanner scn) {
+    private static void mostrarCantidadCaracteres(String oracion, Scanner scn) {
         System.out.println("Cantidad de caracteres en la oración: " + oracion.length());
         scn.nextLine();
     }
 
-    public static void contarPalabras(String oracion, Scanner scn) {
+    private static void contarPalabras(String oracion, Scanner scn) {
         String[] palabras = oracion.split("\\s+");
         System.out.println("Cantidad de palabras en la oración: " + palabras.length);
         scn.nextLine();
     }
 
-    public static String ordenarAlfabeticamente(String oracion, Scanner scn) {
+    private static String ordenarAlfabeticamente(String oracion, Scanner scn) {
         String[] palabras = oracion.split("\\s+");
         Arrays.sort(palabras);
         String ordenada = String.join(" ", palabras);
@@ -170,7 +170,7 @@ public class IntegradoraV {
         return ordenada;
     }
 
-    public static void devolverPalabra(String oracion, Scanner scn) {
+    private static void devolverPalabra(String oracion, Scanner scn) {
         System.out.print("el numero de la palabra a buscar: ");
         int n = scn.nextInt();
         String[] palabras = oracion.split("\\s+");
@@ -183,7 +183,7 @@ public class IntegradoraV {
         scn.nextLine();
     }
 
-    public static void buscarPalabra(String oracion, Scanner scn) {
+    private static void buscarPalabra(String oracion, Scanner scn) {
         System.out.print("Ingrese la palabra a buscar: ");
         String palabra = scn.nextLine(); // Quiero saber si palabra se encuentra y en que POSICION
         String[] palabras = oracion.split("\\s+");
@@ -203,7 +203,7 @@ public class IntegradoraV {
         scn.nextLine();
     }
 
-    public static String modificarPalabra(String oracion, Scanner scn) {
+    private static String modificarPalabra(String oracion, Scanner scn) {
         /*
          * * Modificar palabra dentro de la oración: Solicitar al usuario ingresar la
          * palabra que se quiere cambiar, mostrar un mensaje de error si no se encuentra
@@ -235,7 +235,7 @@ public class IntegradoraV {
         return oracion;
     }
 
-    public static String agregarContenido(String oracion, Scanner scn) {
+    private static String agregarContenido(String oracion, Scanner scn) {
         System.out.print("Ingrese el contenido a agregar: ");
         String contenido = scn.nextLine();
         oracion += " " + contenido;
