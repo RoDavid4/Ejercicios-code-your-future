@@ -154,6 +154,7 @@ public class ClaseArrays {
         int valor = sc.nextInt();
         Arrays.fill(arreglo, valor);
         System.out.println("arreglo rellenado: " + Arrays.toString(arreglo));
+        sc.close();
     }
 
     public static void ejComp() {
@@ -194,18 +195,21 @@ public class ClaseArrays {
         int valor;
         int inicial = -1;
         int fin = 0;
-        while (inicial < tamano -1) {
+        while (inicial < tamano - 1) {
             System.out.println("Ingrese el valor con el que desea rellenar el arreglo");
             valor = sc.nextInt();
             do {
                 System.out.print("Ingrese el índice hasta el cual quiere rellenar el arreglo con el valor anterior: ");
                 fin = sc.nextInt();
                 if (fin <= inicial) {
-                    System.out.println("El índice ingresado debe ser mayor que el último índice (" + inicial+")");
-                } else if (fin >= tamano) {System.out.println("El índice ingresado debe de ser menor que el tamaño (menor que "+tamano+")");}
-            } while ((fin <= inicial)||(fin>=tamano));
+                    System.out.println("El índice ingresado debe ser mayor que el último índice (" + inicial + ")");
+                } else if (fin >= tamano) {
+                    System.out
+                            .println("El índice ingresado debe de ser menor que el tamaño (menor que " + tamano + ")");
+                }
+            } while ((fin <= inicial) || (fin >= tamano));
             inicial++;
-            Arrays.fill(arreglo, inicial, fin+1, valor);
+            Arrays.fill(arreglo, inicial, fin + 1, valor);
             inicial = fin;
         }
         System.out.println("El arreglo completo es: " + Arrays.toString(arreglo));

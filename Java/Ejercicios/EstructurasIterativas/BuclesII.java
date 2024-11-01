@@ -232,7 +232,7 @@ public class BuclesII {
          */
 
         Scanner snn = new Scanner(System.in);
-        int num = 0, suma = 0; 
+        int num = 0, suma = 0;
         System.out.println("\033\143");
         do {
             System.out.println("Ingresa un número entero positivo (0 para salir):");
