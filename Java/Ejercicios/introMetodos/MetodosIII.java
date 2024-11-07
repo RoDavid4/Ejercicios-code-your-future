@@ -1,17 +1,135 @@
-package Java.Ejercicios;
+package Java.Ejercicios.introMetodos;
 
-import Java.Ejercicios.Integradoras.*;
-import Java.Ejercicios.Introductorios.IntroActividad1;
-import Java.Ejercicios.introMetodos.*;
-
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Test {
-public static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args) {
-        ahorcado();
+public class MetodosIII {
+
+    public static Scanner scan = new Scanner(System.in);
+    /*
+     * Actividad: Fibonacci y recursividad
+     * Reorganiza el código extrayendo la lógica en métodos sin alterar su
+     * funcionamiento. Después, intenta modificar la lógica para resolverlo de forma
+     * recursiva.
+     */
+
+    public static void fibonacci() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\033\143");
+        System.out.println("De que numero se quiere calcular el Fibonacci?");
+        int n = sc.nextInt();
+        System.out.println("El fibonacci de " + n + " es: " + fiboAux(n));
+        sc.close();
     }
+
+    private static int fiboAux(int num) {
+        if (num == 0) {
+            return 0;
+        } else if (num == 1) {
+            return 1;
+        } else {
+            return fiboAux(num - 1) + fiboAux(num - 2);
+        }
+    }
+
+    /*
+     * Actividad: Factorial y recursividad
+     * Crea un método llamado "factorial()" que tome un parámetro de tipo "int" y
+     * devuelva un valor entero que corresponda al cálculo del factorial del número
+     * proporcionado. Posteriormente, intenta modificar la lógica para resolverlo de
+     * manera recursiva.
+     */
+
+    public static void factorial() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Ingrese el numero del que quiere el factorial");
+        int num = scan.nextInt();
+
+        int resultado = factorialRecursivo(num);
+        System.out.println("El factorial de " + num + " es " + resultado);
+
+        scan.close();
+    }
+
+    private static int factorialRecursivo(int num) {
+        if (num == 0) {
+            return 1;
+        } else {
+            return num * factorialRecursivo(num - 1);
+        }
+    }
+
+    /*
+     * Actividad: Números primos y recursividad
+     * Crea un método llamado "esPrimo()" que reciba por parámetro un "int" y
+     * devuelva un valor booleano que verifique si el número es primo o no. Luego,
+     * intenta modificar la lógica para resolverlo utilizando recursividad.
+     */
+
+    public static void esPrimo(int numero) {
+        boolean esPrimo = esPrimoRec(numero, 2);
+        System.out.println("¿Es " + numero + " un número primo? " + esPrimo);
+    }
+
+    private static boolean esPrimoRec(int numero, int divisor) {
+        // Caso base: si el número es menor o igual a 2, solo 2 es primo
+        if (numero <= 2) {
+            return (numero == 2);
+        }
+        // Si el número es divisible por el divisor actual, no es primo
+        if (numero % divisor == 0) {
+            return false;
+        }
+        // Si el divisor llega a la raíz cuadrada del número, entonces es primo
+        if (divisor * divisor > numero) {
+            return true;
+        }
+        // Llamada recursiva
+        return esPrimoRec(numero, divisor + 1);
+    }
+
+    /*
+     * Actividad: Manipular oraciones
+     * Crea un método para generar el menú y otro método separado para resolver cada
+     * opción. Si es necesario, puedes crear más métodos adicionales para mejorar la
+     * modularidad y claridad del código.
+     */
+
+    // Ejercicio resuelto de esta manera en
+    // Ejercicios.Integradoras.IntegradoraV.java
+
+    /*
+     * Juego de Adivinar Palabra:
+     * 
+     * Escribe un programa que implemente un juego en el que el usuario debe
+     * adivinar una palabra aleatoria. El programa elegirá una palabra al azar de
+     * una lista predefinida y mostrará una pista de la longitud de la palabra. El
+     * usuario tendrá un número limitado de intentos para adivinar la palabra.
+     * Después de cada intento, el programa mostrará cuántas letras ha adivinado
+     * correctamente y en qué posición se encuentran.
+     * 
+     * El programa debe tener las siguientes características:
+     * 
+     * Utiliza un array de Strings para almacenar una lista de palabras
+     * predefinidas.
+     * 
+     * Utiliza el método Math.random() para seleccionar una palabra aleatoria del
+     * array.
+     * 
+     * Implementa un método para obtener una pista de la palabra seleccionada. Por
+     * ejemplo, si la palabra es "casa", la pista podría ser "_ _ _ _" (cuatro
+     * guiones bajos).
+     * 
+     * Implementa un método para comprobar si una letra ingresada por el usuario
+     * está presente en la palabra seleccionada y en qué posición se encuentra.
+     * 
+     * Utiliza un bucle para permitir al usuario ingresar sus intentos hasta que
+     * adivine la palabra o se agoten los intentos.
+     * 
+     * Muestra un mensaje al usuario al final del juego indicando si adivinó la
+     * palabra correctamente o no, y muestra la palabra completa.
+     */
 
     public static void ahorcado() {
         String[] palabras = { "casa", "perro", "gato", "palo", "murcielago", "castillo", "programacion", "variable",
