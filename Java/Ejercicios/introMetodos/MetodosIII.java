@@ -167,7 +167,7 @@ public class MetodosIII {
 
             switch (intentos) {
                 case 99 -> win = true;
-                case 0 -> System.out.println("Sin vidas restantes, has perdido");
+                case 0 -> System.out.println("Sin vidas restantes, has perdido, la palabra era: " + palabra);
             }
 
         } while (!win && intentos > 0);
@@ -297,7 +297,7 @@ public class MetodosIII {
                 if (!buscarLetra(palabra, letra, pistas)) {
                     intentos--;
                     System.out.println(
-                            "\n La letra no se encuentra, perdio una pista, presiona enter para contuinuar");
+                            "\n La letra no se encuentra, perdio una vida, presiona enter para continuar");
                     scan.nextLine();
                 } else {
                     System.out.println("\n La letra se encuentra, felicidades!, presiona enter para continuar");
