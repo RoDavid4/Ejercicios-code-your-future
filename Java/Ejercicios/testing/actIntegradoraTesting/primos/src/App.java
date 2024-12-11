@@ -9,7 +9,7 @@ public class App {
   }
 
   public static void numPrimos() {
-    System.out.println("\033\143");
+    //System.out.println("\033\143");
     Scanner sc = new Scanner(System.in);
     int num;
     boolean esPrimo = false;

@@ -16,7 +16,7 @@ public class fibboApp {
     sc.close();
   }
 
-  private static int fiboAux(int num) {
+  public static int fiboAux(int num) {
     if (num == 0) {
       return 0;
     } else if (num == 1) {
