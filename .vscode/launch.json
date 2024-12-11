@@ -1,0 +1,210 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "RectanguloTest",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.IntroAPOO.Rectangulo.RectanguloTest",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "FiguraTest",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.IntroAPOO.modelos.FiguraTest",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Aplication",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.IntroAPOO.sistemaDeGestion.Aplication",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "IntroAClaseScannerYOperadoresEnJava",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.Introductorios.IntroAClaseScannerYOperadoresEnJava",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Pruebas",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.Pruebas",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.collectionsHashSets.ej1ListaInvitados.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Application",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.enums.ejerColor.Application",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Application(1)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.enums.ejerDiaSemana.Application",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App(1)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.exceptions.ej1.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App(2)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.exceptions.ej2.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App(3)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.exceptions.ej3.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.geoAbstracta.Main",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Main(1)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.integrador.Main",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App(4)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.introAColecciones.ej1.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App(5)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.introAColecciones.ej2.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "SopaApp",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.introAColecciones.ej3Sopa.SopaApp",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "TurneroApp",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.pooAvanzado.introAColecciones.ej4Turnero.TurneroApp",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App(6)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.actIntegradoraTesting.primos.src.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "EsPar",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.intro.comp1.src.EsPar",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Ejercicio1",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.intro.ej1TuPrimerTest.src.Ejercicio1",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Ejercicio2",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.intro.ej2.src.Ejercicio2",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Ejercicio3",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.intro.ej3.src.Ejercicio3",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "HolaMundo",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.intro.holaMundo.src.HolaMundo",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "ImprimirNombreYEdad",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.intro.impNomEd.src.ImprimirNombreYEdad",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "ImprimirNombreYEdad2",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.intro.impNomEd2.src.ImprimirNombreYEdad2",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App(7)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.pruebasParametrizadas.calificacion.src.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "Application(2)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.pruebasParametrizadas.numerosAleatorios.src.Application",
+            "projectName": "Ejercicios Code your future_4d097909"
+        },
+        {
+            "type": "java",
+            "name": "App(8)",
+            "request": "launch",
+            "mainClass": "Java.Ejercicios.testing.pruebasParametrizadas.validatePass.src.App",
+            "projectName": "Ejercicios Code your future_4d097909"
+        }
+    ]
+}

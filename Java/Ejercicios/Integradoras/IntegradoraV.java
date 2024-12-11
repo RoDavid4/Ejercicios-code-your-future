@@ -3,7 +3,6 @@ package Java.Ejercicios.Integradoras;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.InputMismatchException;
 
 public class IntegradoraV {
  
