@@ -19,11 +19,11 @@ public class AdivNumApp {
          * correctamente.
          */
         Scanner scanner = new Scanner(System.in);
-        int min = 13, max = 35;
+        int min = 13, max = 18;
         int numeroAleatorio = numeroAleatorio(min, max);
         int numero;
         boolean flag = false; // las variables de tipo boolean toman valores true o false (verdadero o falso)
-        System.out.println("\033\143");
+        //System.out.println("\033\143");
 
         do {
             System.out.println("Adivina un número entre "+ min + " y "+ max);
