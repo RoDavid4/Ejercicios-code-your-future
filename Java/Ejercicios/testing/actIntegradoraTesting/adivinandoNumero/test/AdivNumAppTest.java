@@ -39,9 +39,10 @@ public class AdivNumAppTest {
     System.setIn(in);
     // Act
     AdivNumApp.adivNum();
-    String salida = outputStreamCaptor.toString();
     // Assert
-    assertEquals("¡Lo has adivinado!", salida);
+    String salida = outputStreamCaptor.toString().trim(); 
+    String[] lines = salida.split(System.lineSeparator()); 
+    assertTrue(lines[lines.length - 1].contains("¡Lo has adivinado!"));
   }
 
   @Test

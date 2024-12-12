@@ -1,4 +1,4 @@
-package Java.Ejercicios.testing.actIntegradoraTesting.primos.src;
+package Java.Ejercicios.testing.actIntegradoraTesting.primos.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import Java.Ejercicios.testing.actIntegradoraTesting.primos.src.App;
 
 public class AppTest {
   @CsvSource({"0,false", "5,true", "6,false", "7,true", "8,false", "9,false", "10,false"})
