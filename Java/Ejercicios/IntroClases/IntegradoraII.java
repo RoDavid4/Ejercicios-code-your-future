@@ -69,7 +69,7 @@ public class IntegradoraII {
             System.out.println("La contraseña debe tener al menos 8 caracteres.");
         } else {
             if (contraseña.matches(".*[A-Z].*") && contraseña.matches(".*[a-z].*") &&
-                    contraseña.matches(".*[0-9].*") && contraseña.matches(".*[!-~].*")) {
+                    contraseña.matches(".*[0-9].*") && (contraseña.matches(".*[!-/].*") || (contraseña.matches(".*[:-@].*")))) {
                 System.out.println("La contraseña es segura.");
             } else {
                 System.out.println("La contraseña no cumple con los criterios de seguridad.");
