@@ -1,10 +1,8 @@
 package Java.Ejercicios.testing.actIntegradoraTesting.adivinandoNumero.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import Java.Ejercicios.testing.actIntegradoraTesting.adivinandoNumero.src.AdivNumApp;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -34,14 +32,14 @@ public class AdivNumAppTest {
   @Test
   void testAdivNum() {
     // Arrange
-    String num = "13\n 14\n 15\n 16\n 17\n 18\n"   ; 
-    ByteArrayInputStream in = new ByteArrayInputStream(( num.getBytes()));
+    String num = "13\n 14\n 15\n 16\n 17\n 18\n";
+    ByteArrayInputStream in = new ByteArrayInputStream((num.getBytes()));
     System.setIn(in);
     // Act
     AdivNumApp.adivNum();
     // Assert
-    String salida = outputStreamCaptor.toString().trim(); 
-    String[] lines = salida.split(System.lineSeparator()); 
+    String salida = outputStreamCaptor.toString().trim();
+    String[] lines = salida.split(System.lineSeparator());
     assertTrue(lines[lines.length - 1].contains("¡Lo has adivinado!"));
   }
 
