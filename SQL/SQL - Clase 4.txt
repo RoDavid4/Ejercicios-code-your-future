@@ -159,6 +159,7 @@ SELECT SUM(salario) AS 'Suma total salarios' FROM empleados;
 
 /* Calcula la suma total de montos vendidos en todas las ventas. */
 SELECT SUM(monto_total) FROM ventas;
+
 /* Calcula la suma de precios de productos con ID par. */
 SELECT SUM(precio) FROM productos WHERE id % 2 = 0;
 
