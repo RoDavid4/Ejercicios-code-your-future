@@ -1,9 +1,9 @@
 USE mi_bd;
 
 /*
-	##########################
-	Ejercicios consultas multitabla  - Parte 1 
-	##########################
+	##############################################
+	# Ejercicios consultas multitabla  - Parte 1 #
+	##############################################
 */
 
 -- Une las tablas de empleados con departamentos y solo muestra las columnas nombre, apellido, edad, salario de empleados y la columna nombre de departamentos.
