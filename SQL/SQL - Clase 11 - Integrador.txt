@@ -1,3 +1,7 @@
+-- Se corre el siguiente comando para generar la base de datos de la NBA
+
+mysql -u root -p < "C:\Users\drv61\OneDrive\Cursos\Code your Future by Globant University\Ejercicios Code your future\SQL\nba.sql" -v
+
 USE nba;
 
 /*
@@ -114,7 +118,6 @@ redondea el resultado a dos decimales. */
 /* Encuentra el nombre del equipo que ha tenido al menos un jugador que ha promediado más de 10 
 rebotes por partido en la temporada “97/98”. */
 
-
 /*
             ###############################
             # Ejercicios  Complementarios #
@@ -123,27 +126,20 @@ rebotes por partido en la temporada “97/98”. */
 
 -- Correr el script tienda.sql
 
--- mysql -u root -p < "C:\Users\drv61\OneDrive\Cursos\Code your Future by Globant University\Ejercicios Code your future\SQL\tienda.sql" -v
-
 /*
 #######################################
 # Subconsultas (En la cláusula WHERE) #
 #######################################
-*/
-
-USE tienda;
 
             -- Con operadores básicos de comparación
 
 /* Devuelve todos los productos del fabricante Lenovo. (Sin utilizar INNER JOIN). */
 
-/* Devuelve todos los datos de los productos que tienen el mismo precio que el producto más caro del 
-fabricante Lenovo. (Sin utilizar INNER JOIN). */
+/* Devuelve todos los datos de los productos que tienen el mismo precio que el producto más caro del fabricante Lenovo. (Sin utilizar INNER JOIN). */
 
 /* Lista el nombre del producto más caro del fabricante Lenovo. */
 
-/* Lista todos los productos del fabricante Asus que tienen un precio superior al precio medio de 
-todos sus productos. */
+/* Lista todos los productos del fabricante Asus que tienen un precio superior al precio medio de todos sus productos. */
 
             -- Subconsultas con IN y NOT IN
 
@@ -153,5 +149,4 @@ todos sus productos. */
 
             -- Subconsultas (En la cláusula HAVING)
 
-/* Devuelve un listado con todos los nombres de los fabricantes que tienen el mismo número de productos 
-que el fabricante Lenovo. */
+/* Devuelve un listado con todos los nombres de los fabricantes que tienen el mismo número de productos que el fabricante Lenovo. */
