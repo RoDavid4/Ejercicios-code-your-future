@@ -82,11 +82,11 @@ El número de porcentaje debe estar escrito del 1 al 100 con hasta dos decimales
 
 SELECT 
     e.Nombre,
-    ROUND((SUM(CASE 
+    CONCAT (ROUND((SUM(CASE 
           WHEN p.equipo_local = e.Nombre AND p.puntos_local > p.puntos_visitante THEN 1
           WHEN p.equipo_visitante = e.Nombre AND p.puntos_visitante > p.puntos_local THEN 1
           ELSE 0
-          END) * 100.0 / COUNT(*)), 2) AS porcentaje_victorias
+          END) * 100.0 / COUNT(*)), 2),  '%') AS porcentaje_victorias
 FROM 
     equipos AS e
 INNER JOIN 
@@ -98,7 +98,6 @@ GROUP BY
 ORDER BY 
     porcentaje_victorias DESC
 LIMIT 10;
-
 
 /* Calcula el promedio de puntos por partido de los jugadores que son pivotes ('C') y 
 tienen más de 7 pies de altura, y redondea el resultado a dos decimales. */
