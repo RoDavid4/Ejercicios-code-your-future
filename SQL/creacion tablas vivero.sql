@@ -3,7 +3,7 @@ CREATE DATABASE vivero;
 USE vivero;
 
 CREATE TABLE oficina (
-    id_oficina INT PRIMARY KEY,
+    id_oficina INT AUTO_INCREMENT PRIMARY KEY,
     codigo_oficina VARCHAR(10) NOT NULL,
     ciudad VARCHAR(30) NOT NULL,
     pais VARCHAR(50) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE oficina (
 );
 
 CREATE TABLE gama_producto (
-    id_gama INT PRIMARY KEY,
+    id_gama INT AUTO_INCREMENT PRIMARY KEY,
     gama VARCHAR(50) NOT NULL,
     descripcion_texto TEXT DEFAULT NULL,
     descripcion_html TEXT DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE gama_producto (
 );
 
 CREATE TABLE empleado (
-    id_empleado INT PRIMARY KEY,
+    id_empleado INT AUTO_INCREMENT PRIMARY KEY,
     codigo_empleado INT NOT NULL,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE empleado (
 );
 
 CREATE TABLE cliente (
-    id_cliente INT PRIMARY KEY,
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     codigo_cliente INT NOT NULL,
     nombre_cliente VARCHAR(50) NOT NULL,
     nombre_contacto VARCHAR(30) DEFAULT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE cliente (
 );
 
 CREATE TABLE producto (
-    id_producto INT PRIMARY KEY,
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
     codigo_producto VARCHAR(15) NOT NULL,
     nombre VARCHAR(70) NOT NULL,
     id_gama INT NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE producto (
 );
 
 CREATE TABLE pedido (
-    id_pedido INT PRIMARY KEY,
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     codigo_pedido INT NOT NULL,
     fecha_pedido DATE NOT NULL,
     fecha_esperada DATE NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE pedido (
 );
 
 CREATE TABLE pago (
-    id_pago INT PRIMARY KEY,
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL,
     forma_pago VARCHAR(40) NOT NULL,
     id_transaccion VARCHAR(50) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE pago (
 );
 
 CREATE TABLE detalle_pedido (
-    id_detalle_pedido INT PRIMARY KEY,
+    id_detalle_pedido INT AUTO_INCREMENT PRIMARY KEY,
     id_pedido INT NOT NULL,
     id_producto INT NOT NULL,
     cantidad INT NOT NULL,
