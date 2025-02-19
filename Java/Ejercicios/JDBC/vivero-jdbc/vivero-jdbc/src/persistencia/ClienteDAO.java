@@ -63,7 +63,7 @@ public class ClienteDAO extends DAO {
   }
 
   public void buscarClientePorCodigo(int codigo) throws Exception {
-    String sql = "SELECT * FROM cliente WHERE id_cliente = " + codigo;
+    String sql = "SELECT * FROM cliente WHERE codigo_cliente = " + codigo;
     consultarDataBase(sql);
 
     if (resultSet.next()) {

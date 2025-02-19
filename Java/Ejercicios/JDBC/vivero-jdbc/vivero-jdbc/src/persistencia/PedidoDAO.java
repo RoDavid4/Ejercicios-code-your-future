@@ -38,7 +38,7 @@ public class PedidoDAO extends DAO {
     return listarPedidosAux();
   }
 
-  private List<Pedido> listarPedidosAux () throws Exception {
+  private List<Pedido> listarPedidosAux() throws Exception {
     List<Pedido> pedidos = new ArrayList<>();
     while (resultSet.next()) {
       Pedido pedido =
@@ -57,5 +57,28 @@ public class PedidoDAO extends DAO {
     }
 
     return pedidos;
+  }
+
+  public void guardarPedido(Pedido pedido) throws Exception {
+
+    String query =
+        "INSERT INTO Pedido (codigo_pedido, fecha_pedido, fecha_esperada, fecha_entrega, estado,"
+            + " comentarios, id_cliente) VALUES ("
+            + pedido.getCodigoPedido()
+            + ", '"
+            + new java.sql.Date(pedido.getFechaPedido().getTime())
+            + "', '"
+            + new java.sql.Date(pedido.getFechaEsperada().getTime())
+            + "', '"
+            + new java.sql.Date(pedido.getFechaEntrega().getTime())
+            + "', '"
+            + pedido.getEstado()
+            + "', '"
+            + pedido.getComentario()
+            + "', "
+            + pedido.getIdCliente()
+            + ");";
+
+    insertarModificarEliminarDataBase(query);
   }
 }

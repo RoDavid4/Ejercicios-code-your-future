@@ -12,11 +12,11 @@ public class Cliente {
     private String pais;
     private String codigoPostal;
     private int idEmpleado;
-    private float limiteCredito;
+    private double limiteCredito;
 
     public Cliente(int idCliente, int codigoCliente, String nombreCliente, String nombreContacto,
             String apellidoContacto, String telefono, String fax, String ciudad, String region, String pais,
-            String codigoPostal, int idEmpleado, float limiteCredito) {
+            String codigoPostal, int idEmpleado, double limiteCredito) {
         this.idCliente = idCliente;
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
@@ -34,7 +34,7 @@ public class Cliente {
 
     public Cliente(int codigoCliente, String nombreCliente, String nombreContacto,
             String apellidoContacto, String telefono, String fax, String ciudad, String region, String pais,
-            String codigoPostal, int idEmpleado, float limiteCredito) {
+            String codigoPostal, int idEmpleado, double limiteCredito) {
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
         this.nombreContacto = nombreContacto;
@@ -127,7 +127,7 @@ public class Cliente {
     public double getLimiteCredito() {
         return limiteCredito;
     }
-    public void setLimiteCredito(float limiteCredito) {
+    public void setLimiteCredito(double limiteCredito) {
         this.limiteCredito = limiteCredito;
     }
 

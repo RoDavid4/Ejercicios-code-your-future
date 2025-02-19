@@ -41,7 +41,7 @@ public class OficinaDAO extends DAO {
   }
 
   public List<Oficina> listarOficinas() throws Exception {
-    String sql = "SELECT * FROM oficinas";
+    String sql = "SELECT * FROM oficina";
     consultarDataBase(sql);
 
     return listarOficinasAux();
