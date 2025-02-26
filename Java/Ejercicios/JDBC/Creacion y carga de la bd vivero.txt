@@ -1,0 +1,13 @@
+se creo el script "creacion tablas vivero.slq"
+
+se corrio el script:
+mysql -u root -p < "C:\Users\drv61\OneDrive\Cursos\Code your Future by Globant University\Ejercicios Code your future\SQL\creacion tablas vivero.sql" -v
+
+se corre el comando para usar la BD:
+USE vivero;
+
+se corre el script de carga de datos:
+mysql -u root -p < "C:\Users\drv61\OneDrive\Cursos\Code your Future by Globant University\Ejercicios Code your future\SQL\datos vivero.sql" -v
+
+El script falla en la linea 307 donde se le intenta dar como clave foranea a un pago el ID de un cliente 
+INEXISTENTE, idem a partir de ahi.
