@@ -7,9 +7,9 @@ import java.util.UUID;
 @Table(name = "autor")
 public class Autor {
 
-  @Column(name = "id_autor")
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id_autor")
   private UUID id;
 
   @Column(name = "nombre", unique = true, nullable = false)

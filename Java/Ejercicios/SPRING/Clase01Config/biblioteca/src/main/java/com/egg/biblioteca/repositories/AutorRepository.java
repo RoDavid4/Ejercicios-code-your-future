@@ -1,4 +1,4 @@
-package com.egg.biblioteca.repository;
+package com.egg.biblioteca.repositories;
 
 import java.util.UUID;
 

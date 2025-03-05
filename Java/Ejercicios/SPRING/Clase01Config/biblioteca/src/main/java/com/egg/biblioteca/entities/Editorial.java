@@ -1,5 +1,7 @@
 package com.egg.biblioteca.entities;
 
+import java.util.UUID;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +10,7 @@ public class Editorial {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id_editorial")
-  private String id;
+  private UUID id;
 
   @Column(name = "nombre", unique = true, nullable = false)
   private String nombre;
@@ -28,11 +30,12 @@ public class Editorial {
     return "Editorial [id=" + id + ", nombre=" + nombre + "]";
   }
 
-public String getId() {
+  public UUID getId() {
     return id;
-}
+  }
 
-public void setId(String id) {
+  public void setId(UUID id) {
     this.id = id;
-}
+  }
+
 }
