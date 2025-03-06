@@ -1,11 +1,18 @@
 package com.egg.biblioteca.controllers;
 
+import com.egg.biblioteca.entities.Autor;
+import com.egg.biblioteca.entities.Editorial;
+import com.egg.biblioteca.entities.Libro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import com.egg.biblioteca.services.EditorialService;
 import com.egg.biblioteca.exceptions.MyException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -30,5 +37,38 @@ public class EditorialController {
             return "editorial_form.html";
         }
         return "index.html";
+    }
+
+    @GetMapping("/lista")
+    public String listar(ModelMap modelo) {
+
+        List<Editorial> editoriales = editorialService.listarEditoriales();
+        modelo.addAttribute("editoriales", editoriales);
+        return "editorial_list.html";
+    }
+
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable UUID id, ModelMap modelo) throws MyException {
+
+        try {
+            modelo.put("editorial", editorialService.getOne(id));
+        } catch (MyException ex) {
+            modelo.put("error", ex.getMessage());
+        }
+
+        return "editorial_modificar.html";
+    }
+
+    @PostMapping("/modificar/{id}")
+    public String modificar(@PathVariable UUID id, String nombre, RedirectAttributes redirectAttributes) {
+        try {
+            editorialService.modificarEditorial(nombre, id);
+
+            redirectAttributes.addFlashAttribute("exito", "La editorial fue modificada correctamente");
+            return "redirect:../lista"; // Mensaje disponible tras redirección
+        } catch (MyException ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            return "redirect:../modificar/" + id; // Redirige al formulario con mensaje de error
+        }
     }
 }

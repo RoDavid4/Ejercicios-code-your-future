@@ -58,31 +58,54 @@ public class LibroService {
         return libros;
     }
 
+    @Transactional(readOnly = true)
+    public Libro  getOne(Long id) {
+        return libroRepository.getReferenceById (id);
+    }
+
     @Transactional
     public void modificarLibro(
             Long isbn, String titulo, Integer ejemplares, UUID autor, UUID editorial, Long id) throws MyException {
         validarLibro(isbn, titulo, ejemplares, autor, editorial, id);
 
-        Optional<Libro> respuestaL = libroRepository.findById(id);
+        Optional<Libro> respuestaL = libroRepository.findById(isbn);
         Optional<Autor> respuestaA = autorRepository.findById(autor);
         Optional<Editorial> respuestaE = editorialRepository.findById(editorial);
 
         if (respuestaL.isPresent() && respuestaA.isPresent() && respuestaE.isPresent()) {
-            Libro libro = respuestaL.get();
 
-            libro.setIsbn(isbn);
-            libro.setTitulo(titulo);
-            libro.setEjemplares(ejemplares);
-            libro.setAutor(respuestaA.get());
-            libro.setEditorial(respuestaE.get());
-            libroRepository.save(libro);
+            borrarLibro(isbn);
+
+            crearLibro(id, titulo, ejemplares, autor, editorial);
+            System.out.println("guardado");
+
         } else {
             throw new MyException("Hay datos faltantes o incorrectos");
         }
     }
 
+    @Transactional
+    public void borrarLibro(Long isbn) throws MyException {
+        Optional<Libro> libroOpt = libroRepository.findById(isbn);
+
+        if (libroOpt.isPresent()) {
+            Libro libro = libroOpt.get();
+            libroRepository.delete(libro); // Eliminar el libro de la base de datos
+            libroRepository.flush(); // Forzar la confirmación inmediata del borrado
+            System.out.println("El libro ha sido eliminado exitosamente.");
+        } else {
+            throw new MyException("El libro con ISBN " + isbn + " no existe en la base de datos.");
+        }
+    }
+
     private void validarLibro (
             Long isbn, String titulo, Integer ejemplares, UUID autor, UUID editorial, Long id) throws MyException{
+        Optional<Libro> respuestaL = libroRepository.findById(id);
+
+        if (!respuestaL.isEmpty()) {
+            throw new MyException("Ya existe un libro con ese ISBN");
+        }
+
         if (isbn == null
                 || titulo == null
                 || titulo.isEmpty()

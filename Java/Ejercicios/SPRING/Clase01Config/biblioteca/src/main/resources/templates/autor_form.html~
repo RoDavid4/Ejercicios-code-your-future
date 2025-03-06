@@ -92,7 +92,7 @@
 
         <div class="form-group my-3">
             <label class="mb-2">Cargar Autores</label>
-            <input type="text" class="form-control" name="nombre" placeholder="Nombre del Autor">
+            <input type="text" class="form-control" name="nombre" placeholder=" Nombre del Autor">
         </div>
 
         <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>

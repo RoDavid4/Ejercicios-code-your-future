@@ -38,6 +38,12 @@ public class AutorService {
         return autorRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public Autor getOne(UUID id) throws MyException {
+        validarId(id);
+        return autorRepository.getReferenceById (id);
+    }
+
     // Método público para modificar un Autor
     @Transactional
     public void modificarAutor(String nombre, UUID id) throws MyException {

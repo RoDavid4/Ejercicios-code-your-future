@@ -39,6 +39,12 @@ public class EditorialService {
         return editoriales;
     }
 
+    @Transactional(readOnly = true)
+    public Editorial  getOne(UUID id) throws MyException {
+        validarEditorial(id);
+        return editorialRepository.getReferenceById (id);
+    }
+
     @Transactional
     public void modificarEditorial(String nombre, UUID id) throws MyException {
         validarEditorial(nombre, id);
@@ -63,5 +69,10 @@ public class EditorialService {
         }
     }
 
+    private void validarEditorial(UUID id) throws MyException {
+        if (id == null) {
+            throw new MyException("El ID no puede ser nulo.");
+        }
+    }
 
 }

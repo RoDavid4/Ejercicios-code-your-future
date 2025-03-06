@@ -74,7 +74,7 @@
 </nav>
 <div class="container-fluid m-5 contenedor">
 
-  <form class="formulario" th:action="@{/editorial/registro}" method="POST">
+  <form class="formulario" th:action="@{/editorial/modificar/__${editorial.id}__}" method="POST">
 
     <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
       <div class="card-body">
@@ -91,11 +91,11 @@
     </div>
 
     <div class="form-group my-3">
-      <label class="mb-2">Cargar Editoriales</label>
-      <input type="text" class="form-control" name="nombre" placeholder=" Nombre de la Editorial">
+      <label class="mb-2">Modificar Editorial</label>
+      <input type="text" class="form-control" name="nombre" placeholder=" Nombre de la Editorial" th:value="${editorial.nombre}">
     </div>
 
-    <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+    <button type="submit" class="btn btn-primary mt-3 botones">Actualizar</button>
   </form>
 
   <section class=" text-center container">

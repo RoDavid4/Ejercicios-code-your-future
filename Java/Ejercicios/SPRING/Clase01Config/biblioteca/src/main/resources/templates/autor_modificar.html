@@ -74,7 +74,7 @@
 </nav>
 <div class="container-fluid m-5 contenedor">
 
-    <form class="formulario" th:action="@{/autor/registro}" method="POST">
+    <form class="formulario" th:action="@{/autor/modificar/__${autor.id}__}" method="POST">
 
         <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
             <div class="card-body">
@@ -85,17 +85,19 @@
 
         <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
             <div class="card-body">
-                <h5 class="card-title">Error 👎</h5>
+                <h5 class="card-title">Error 👎 </h5>
                 <p class="card-text" th:text="${error}"></p>
             </div>
         </div>
 
+        <input hidden th:value="${autor.id}" name="id">
+
         <div class="form-group my-3">
-            <label class="mb-2">Cargar Autores</label>
-            <input type="text" class="form-control" name="nombre" placeholder=" Nombre del Autor">
+            <label class="mb-2">Modificar autor</label>
+            <input type="text" class="form-control" name="nombre" placeholder=" Nombre del Autor " th:value="${autor.nombre}">
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+        <button type="submit" class="btn btn-primary mt-3 botones">Actualizar</button>
     </form>
 
     <section class=" text-center container">
