@@ -26,8 +26,11 @@
                         Libros
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        
-                        <li><a class="dropdown-item" th:href="@{/libro/registrar}">Crear Libro</a></li>
+
+                        <li>
+                            <a class="dropdown-item" th:href="@{/libro/registrar}">Crear Libro</a>
+                        </li>
+
                         <li><hr class="dropdown-divider"></li>
                         
                         <li><a class="dropdown-item" th:href="@{/libro/lista}">Listar Libros</a></li>
@@ -40,10 +43,10 @@
                         Autores
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        
+
                         <li><a class="dropdown-item" th:href="@{/autor/registrar}">Crear Autor</a></li>
                         <li><hr class="dropdown-divider"></li>
-                       
+
                         <li><a class="dropdown-item" th:href="@{/autor/lista}">Listar Autores</a></li>
                     </ul>
                 </li>
@@ -55,10 +58,10 @@
                         Editoriales
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        
+
                         <li><a class="dropdown-item" th:href="@{/editorial/registrar}">Crear Editorial</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        
+
                         <li><a class="dropdown-item" th:href="@{/editorial/lista}">Listar Editoriales</a></li>
                     </ul>
                 </li>
@@ -68,13 +71,13 @@
 
         <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
             <div class="card-body">
-                <h5 class="card-title">Exito</h5>
+                <h5 class="card-title">Exito 👍 </h5>
                 <p class="card-text" th:text="${exito}"></p>
             </div>
         </div>
         <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
             <div class="card-body">
-                <h5 class="card-title">Error ð</h5>
+                <h5 class="card-title">Error 👎 </h5>
                 <p class="card-text" th:text="${error}"></p>
             </div>
         </div>

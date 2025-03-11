@@ -3,6 +3,8 @@ package com.egg.biblioteca.controllers;
 import com.egg.biblioteca.exceptions.MyException;
 import com.egg.biblioteca.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +30,6 @@ public class PortalController {
         return "registro.html";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login.html";
-    }
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
@@ -44,8 +42,22 @@ public class PortalController {
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
             return "redirect:/registrar"; // volvemos a cargar el formulario.
         }
-        return "redirect:/";
+        return "redirect:/"; // Redirigimos al index con el mensaje "flash"
 
     }
+
+    @GetMapping("/login")
+    public String login(@RequestParam(required = false) String error, ModelMap modelo ) {
+        if (error != null) {
+            modelo.put("error", "Usuario o Contraseña inválidos!");        }
+        return "login.html";
+    }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @GetMapping("/inicio")
+    public String inicio(){
+        return "inicio.html";
+    }
+
 
 }

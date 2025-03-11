@@ -4,6 +4,7 @@ import com.egg.biblioteca.entities.Autor;
 import com.egg.biblioteca.entities.Editorial;
 import com.egg.biblioteca.entities.Libro;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class EditorialController {
     @Autowired
     private EditorialService editorialService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/registrar") // localhost:8080/editorial/registrar
     public String registrar() {
         return "editorial_form.html";
@@ -47,6 +49,7 @@ public class EditorialController {
         return "editorial_list.html";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable UUID id, ModelMap modelo) throws MyException {
 

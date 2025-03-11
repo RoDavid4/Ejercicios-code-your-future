@@ -4,6 +4,7 @@ import com.egg.biblioteca.entities.Autor;
 import com.egg.biblioteca.entities.Editorial;
 import com.egg.biblioteca.entities.Libro;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ public class LibroController {
     @Autowired
     private EditorialService editorialService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/registrar") // localhost:8080/libro/registrar
     public String registrar(ModelMap model) {
         List<Autor> autores = autorService.listarAutores();
@@ -55,6 +57,7 @@ public class LibroController {
         return "libro_list.html";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable long id, ModelMap modelo) {
 
@@ -64,6 +67,7 @@ public class LibroController {
 
         return "libro_modificar.html";
     }
+
 
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable @RequestParam(required = false) Long isbn, @RequestParam String titulo,

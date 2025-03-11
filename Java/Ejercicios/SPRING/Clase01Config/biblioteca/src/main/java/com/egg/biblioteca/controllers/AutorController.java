@@ -3,6 +3,7 @@ package com.egg.biblioteca.controllers;
 import com.egg.biblioteca.entities.Autor;
 import com.egg.biblioteca.services.EditorialService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 
 @Controller
@@ -24,6 +23,7 @@ public class AutorController {
     @Autowired
     private EditorialService editorialService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/registrar") // localhost:8080/autor/registrar
     public String registrar() {
         return "autor_form.html";
@@ -49,6 +49,7 @@ public class AutorController {
         return "autor_list.html";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable UUID id, ModelMap modelo) throws MyException {
 

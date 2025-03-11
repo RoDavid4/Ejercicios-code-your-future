@@ -75,7 +75,7 @@ public class LibroService {
         if (respuestaL.isPresent() && respuestaA.isPresent() && respuestaE.isPresent()) {
 
             borrarLibro(isbn);
-
+            libroRepository.flush();
             crearLibro(id, titulo, ejemplares, autor, editorial);
             System.out.println("guardado");
 
@@ -102,7 +102,7 @@ public class LibroService {
             Long isbn, String titulo, Integer ejemplares, UUID autor, UUID editorial, Long id) throws MyException{
         Optional<Libro> respuestaL = libroRepository.findById(id);
 
-        if (!respuestaL.isEmpty()) {
+        if (!respuestaL.isEmpty() && (!isbn.equals(id))) { // Si isbn es igual al id es una modificacion en otros campos
             throw new MyException("Ya existe un libro con ese ISBN");
         }
 
@@ -115,6 +115,7 @@ public class LibroService {
                 || id == null) {
             throw new MyException("Los datos proporcionados son inválidos o están incompletos.");
         }
+
     }
 
     private void validarLibro(
