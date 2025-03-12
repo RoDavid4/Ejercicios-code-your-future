@@ -19,15 +19,16 @@
 <div class="container m-5" >
 
   <table class="table table-dark">
+
     <thead>
     <tr>
       <th scope="col">Id del Usuario</th>
       <th scope="col">Nombre</th>
       <th scope="col">Rol</th>
       <th scope="col">Cambiar Rol</th>
-
     </tr>
     </thead>
+
     <tbody th:each="usuario : ${usuarios}">
     <tr>
       <th scope="row" th:text="${usuario.id}"></th>
@@ -48,6 +49,7 @@
       <p class="card-text" th:text="${exito}"></p>
     </div>
   </div>
+
   <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
     <div class="card-body">
       <h5 class="card-title">Error 👎 </h5>
@@ -66,17 +68,7 @@
 
 </div>
 
-<footer class="text-muted py-5">
-  <div class="containerFooter">
-    <p class="mb-1">Album example is &copy; Bootstrap,<br>but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/"><br>Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
-    <p class="float-end mb-1">
-      <a href="#" style="text-decoration:none"><span>⬆️</span> Back to top</a>
-    </p>
-  </div>
-</footer>
-
-
+<footer th:replace="fragments/footer :: footer"></footer>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

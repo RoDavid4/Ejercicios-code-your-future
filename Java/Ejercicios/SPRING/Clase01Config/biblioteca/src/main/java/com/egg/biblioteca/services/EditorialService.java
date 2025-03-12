@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.egg.biblioteca.entities.Editorial;
 import com.egg.biblioteca.repositories.EditorialRepository;
-import com.egg.biblioteca.exceptions.MyException;
 
 import org.springframework.transaction.annotation.Transactional;
 

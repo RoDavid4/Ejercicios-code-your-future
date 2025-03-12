@@ -14,8 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 @Controller
 @RequestMapping("/editorial")

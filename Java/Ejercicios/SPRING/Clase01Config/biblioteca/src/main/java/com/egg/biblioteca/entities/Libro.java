@@ -1,7 +1,6 @@
 package com.egg.biblioteca.entities;
 
 import java.util.Date;
-
 import jakarta.persistence.*;
 
 @Entity

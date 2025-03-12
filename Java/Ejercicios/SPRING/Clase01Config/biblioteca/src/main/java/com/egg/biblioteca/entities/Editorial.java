@@ -1,7 +1,6 @@
 package com.egg.biblioteca.entities;
 
 import java.util.UUID;
-
 import jakarta.persistence.*;
 
 @Entity
