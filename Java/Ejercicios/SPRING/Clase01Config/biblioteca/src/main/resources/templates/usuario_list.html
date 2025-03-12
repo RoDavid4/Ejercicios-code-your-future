@@ -21,18 +21,20 @@
   <table class="table table-dark">
     <thead>
     <tr>
-      <th scope="col">ISBN del Libro</th>
-      <th scope="col">Titulo</th>
-      <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Acciones</th>
+      <th scope="col">Id del Usuario</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Rol</th>
+      <th scope="col">Cambiar Rol</th>
 
     </tr>
     </thead>
-    <tbody th:each="libro : ${libros}">
+    <tbody th:each="usuario : ${usuarios}">
     <tr>
-      <th scope="row" th:text="${libro.isbn}"></th>
-      <td th:text="${libro.titulo}"></td>
-      <td sec:authorize="hasRole('ROLE_ADMIN')">
-        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href= "@{/libro/modificar/__${libro.isbn}__}"><i class="fas fa-feather-alt">  </i> Modificar </a>
+      <th scope="row" th:text="${usuario.id}"></th>
+      <td th:text="${usuario.nombre}"></td>
+      <td th:text="${usuario.rol}"></td>
+      <td>
+        <a th:href= "@{/admin/modificarRol/__${usuario.id}__}"><i class="fas fa-feather-alt">  </i> Swapear Rol </a>
       </td>
 
     </tr>

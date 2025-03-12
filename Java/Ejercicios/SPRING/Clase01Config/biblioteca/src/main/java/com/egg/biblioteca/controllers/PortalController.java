@@ -1,7 +1,9 @@
 package com.egg.biblioteca.controllers;
 
+import com.egg.biblioteca.entities.Usuario;
 import com.egg.biblioteca.exceptions.MyException;
 import com.egg.biblioteca.services.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -53,11 +55,16 @@ public class PortalController {
         return "login.html";
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(){
+    public String inicio(HttpSession session) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        if (logueado.getRol().toString().equals("ADMIN")) {
+            return "redirect:/admin/dashboard";
+        }
         return "inicio.html";
     }
+
 
 
 }
