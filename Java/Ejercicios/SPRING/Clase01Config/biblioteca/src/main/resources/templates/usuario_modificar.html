@@ -11,28 +11,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navBar">
-  <div class="containerImg">
-    <a href="#" class="navbar-brand d-flex align-items-center">
-      <img class="logo" src="/img/Egg.png" alt="Img logo egg">
-    </a>
-  </div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse elementosNav" id="navbarNavDropdown">
-    <ul class="navbar-nav ms-auto elementos">
-      <li class="nav-item">
-        <a class="nav-link" href="/login" id="navbarDropdown" role="button" aria-expanded="false">
-          Ingresar
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<nav th:replace="~{fragments/navbar :: nav}"> </nav>
 
 <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
   <div class="card-body">

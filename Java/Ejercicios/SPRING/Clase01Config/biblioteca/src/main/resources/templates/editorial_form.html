@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<nav th:replace="fragments/navbar :: nav"></nav>
+<nav th:replace="~{fragments/navbar :: nav}"></nav>
 
 <div class="container-fluid m-5 contenedor">
 
@@ -46,7 +46,7 @@
     </section>
 </div>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
