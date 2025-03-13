@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,7 +32,7 @@ public class AdminController {
     }
 
     @GetMapping("/modificarRol/{id}")
-    public String cambiarRol (@PathVariable String id) {
+    public String cambiarRol (@PathVariable UUID id) {
 
         usuarioService.cambiarRol(id);
 

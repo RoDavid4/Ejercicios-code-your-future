@@ -26,8 +26,14 @@
             <a class="navbar-brand" href="#">BIBLIOTECA EGG</a>
         </div>
         <div class="container contenedorLibros">
-            <p class="tituloLibros">Encontrá todos los Libros Aquí!</p>
-
+            <p class="tituloLibros" th:if="${session.usuariosession != null}"
+               th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
+            <!-- <a class="btn btn-xl mt-2 boton">Ver Listado</a> -->
+        </div>
+        <div class="container">
+            <a class="d-flex align-items-center">
+                <img class="logo" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="Img logo egg">
+            </a>
         </div>
         <div class="bg-circle-1 bg-circle"></div>
         <div class="bg-circle-2 bg-circle"></div>

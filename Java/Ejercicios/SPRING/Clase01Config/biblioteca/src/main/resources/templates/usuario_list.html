@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<nav th:replace = "fragments/navbar :: nav"> </nav>
+<nav th:replace = "~{fragments/navbar :: nav}"> </nav>
 
 <div class="container m-5" >
 
@@ -23,6 +23,7 @@
     <thead>
     <tr>
       <th scope="col">Id del Usuario</th>
+      <th scope="col">Imagen de Perfil</th>
       <th scope="col">Nombre</th>
       <th scope="col">Rol</th>
       <th scope="col">Cambiar Rol</th>
@@ -32,6 +33,7 @@
     <tbody th:each="usuario : ${usuarios}">
     <tr>
       <th scope="row" th:text="${usuario.id}"></th>
+      <td><img class="logo" th:src="@{/imagen/perfil/__${usuario.id}__}" alt="Img logo egg"></td>
       <td th:text="${usuario.nombre}"></td>
       <td th:text="${usuario.rol}"></td>
       <td>
@@ -68,7 +70,7 @@
 
 </div>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

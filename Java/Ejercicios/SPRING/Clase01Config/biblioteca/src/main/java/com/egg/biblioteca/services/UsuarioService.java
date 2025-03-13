@@ -1,5 +1,6 @@
 package com.egg.biblioteca.services;
 
+import com.egg.biblioteca.entities.Imagen;
 import com.egg.biblioteca.entities.Usuario;
 import com.egg.biblioteca.enumerates.Rol;
 import com.egg.biblioteca.exceptions.MyException;
@@ -17,25 +18,62 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UsuarioService implements UserDetailsService {
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ImagenService imagenService;
 //Los métodos del servicio
 
     @Transactional
-    public void registrar(String nombre, String email, String password, String password2) throws MyException {
+    public void registrar(MultipartFile archivo, String nombre, String email, String password, String password2) throws MyException {
         validar(nombre, email, password, password2);
         Usuario usuario = new Usuario();
         usuario.setNombre(nombre);
         usuario.setEmail(email);
         usuario.setPassword(new BCryptPasswordEncoder().encode(password)); // Encripta la contraseña antes de guardar
         usuario.setRol(Rol.USER);
+        Imagen imagen = imagenService.guardar(archivo);
+        usuario.setImagen(imagen);
+
+        usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public void actualizar(MultipartFile archivo, UUID idUsuario, String nombre, String email, String password, String password2) throws MyException {
+
+        validar(nombre, email, password, password2);
+
+        Optional<Usuario> respuesta = usuarioRepository.findById(idUsuario);
+
+
+        if (respuesta.isEmpty()) {
+            throw new MyException("El usuario especificado no existe.");
+        }
+
+        Usuario usuario = respuesta.get();
+        usuario.setNombre(nombre);
+        usuario.setEmail(email);
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+
+        String idImagen =  null;
+
+        if (usuario.getImagen() != null) {
+            idImagen = usuario.getImagen().getId();
+        }
+
+        Imagen imagen = imagenService.actualizar(archivo, idImagen);
+        usuario.setImagen(imagen);
+
         usuarioRepository.save(usuario);
     }
 
@@ -80,19 +118,19 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public Usuario getOne(String id) throws MyException {
+    public Usuario getOne(UUID id) throws MyException {
         validarId(id);
         return usuarioRepository.getReferenceById (id);
     }
 
-    private void validarId(String id) throws MyException {
+    private void validarId(UUID id) throws MyException {
         if (id == null) {
             throw new MyException("El ID no puede ser nulo.");
         }
     }
 
     @Transactional
-    public void cambiarRol(String id) {
+    public void cambiarRol(UUID id) {
         Optional<Usuario> respuesta = usuarioRepository.findById(id);
 
         if (respuesta.isPresent()) {

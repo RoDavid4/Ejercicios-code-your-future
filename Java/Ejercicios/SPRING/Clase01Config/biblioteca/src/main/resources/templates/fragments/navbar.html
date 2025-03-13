@@ -81,7 +81,11 @@
                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Perfil
                 </a>
+
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    <li><a class="dropdown-item" th:href="@{/perfil}">EditarPerfil</a></li>
+                    <hr class="dropdown-divider" >
                     <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
                 </ul>
             </li>

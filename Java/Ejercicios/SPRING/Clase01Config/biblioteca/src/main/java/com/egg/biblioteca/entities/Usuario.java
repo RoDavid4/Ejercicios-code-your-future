@@ -4,17 +4,22 @@ import com.egg.biblioteca.enumerates.Rol;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.UUID;
+
 @Entity
 public class Usuario {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name ="uuid", strategy = "uuid2")
-    private String id;
+    private UUID id;
     private String nombre;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private Rol rol;
+
+    @OneToOne
+    private Imagen imagen;
 
     public Usuario() {
     }
@@ -27,11 +32,11 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -57,5 +62,13 @@ public class Usuario {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public Imagen getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
     }
 }
