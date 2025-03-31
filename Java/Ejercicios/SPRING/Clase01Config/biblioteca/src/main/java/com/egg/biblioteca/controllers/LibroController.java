@@ -35,6 +35,7 @@ public class LibroController {
         return "libro_form.html";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/registro")
     public String registro(@RequestParam(required = false) Long isbn, @RequestParam String titulo,
                            @RequestParam(required = false) Integer ejemplares, @RequestParam UUID id_Autor,
@@ -68,7 +69,7 @@ public class LibroController {
         return "libro_modificar.html";
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable @RequestParam(required = false) Long isbn, @RequestParam String titulo,
                             @RequestParam(required = false) Integer ejemplares, @RequestParam UUID id_Autor,

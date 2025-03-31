@@ -1,0 +1,23 @@
+package com.egg.casaelectricidad.entities;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.util.UUID;
+
+@Data
+@Entity
+public class Imagen {
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private UUID id;
+    private String mime;
+    private String nombre;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] contenido;
+
+}

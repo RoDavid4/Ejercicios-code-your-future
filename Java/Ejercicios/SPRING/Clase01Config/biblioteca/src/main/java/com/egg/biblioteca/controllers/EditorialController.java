@@ -27,6 +27,8 @@ public class EditorialController {
     public String registrar() {
         return "editorial_form.html";
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, ModelMap model)  {
         try {
@@ -60,6 +62,7 @@ public class EditorialController {
         return "editorial_modificar.html";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable UUID id, String nombre, RedirectAttributes redirectAttributes) {
         try {

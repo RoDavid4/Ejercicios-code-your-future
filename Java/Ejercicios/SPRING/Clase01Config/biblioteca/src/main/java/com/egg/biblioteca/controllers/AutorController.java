@@ -29,6 +29,7 @@ public class AutorController {
         return "autor_form.html";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, ModelMap model){
         try {
@@ -62,7 +63,7 @@ public class AutorController {
         return "autor_modificar.html";
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable UUID id, String nombre, RedirectAttributes redirectAttributes) {
         try {

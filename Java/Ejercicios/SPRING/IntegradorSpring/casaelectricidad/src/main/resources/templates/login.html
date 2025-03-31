@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head :: head ('Login')}"></head>
+
+<body>
+<div class="main-container">
+    <header class="header-container">
+        <h1>La Casa de Electricidad </h1>
+        <nav th:replace="~{fragments/navbar :: nav}"></nav>
+    </header>
+
+    <div th:replace="~{fragments/succesorerror :: div}"></div>
+
+    <main>
+        <section class="form-container">
+            <h2>Iniciar Sesión</h2>
+            <form th:action="@{/logincheck}" method="POST">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" >
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" >
+
+                <button type="submit" class="btn">Iniciar sesión</button>
+            </form>
+        </section>
+        <section class="text-center container">
+            <div class="row mt-3">
+                <div class="divVolver">
+                    <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</div>
+</body>
+</html>
