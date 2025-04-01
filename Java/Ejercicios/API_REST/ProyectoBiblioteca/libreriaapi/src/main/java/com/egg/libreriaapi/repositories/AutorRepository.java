@@ -9,4 +9,5 @@ import com.egg.libreriaapi.entities.Autor;
 
 @Repository
 public interface AutorRepository extends JpaRepository<Autor, UUID> {
+    
 }

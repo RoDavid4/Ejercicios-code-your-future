@@ -27,6 +27,7 @@ public class AutorService {
 
         Autor autor = new Autor();
         autor.setNombre(nombre);
+        autor.setAutorActivo(true);
 
         autorRepository.save(autor);
     }
@@ -51,10 +52,27 @@ public class AutorService {
         validarId(id); // Validación del ID
 
         Optional<Autor> respuesta = autorRepository.findById(id);
+           
         if (respuesta.isPresent()) {
             Autor autor = respuesta.get();
-            autor.setNombre(nombre);
-            autorRepository.save(autor);
+            if (autor.getAutorActivo()){
+                autor.setNombre(nombre);
+            } else {
+                throw new MyException("El autor no está activo");
+            }
+        } else {
+            throw new MyException("El autor con el ID especificado no existe.");
+        }
+    }
+
+    @Transactional
+    public void eliminarAutor(UUID id) throws MyException {
+        validarId(id);
+
+        Optional<Autor> respuesta = autorRepository.findById(id);
+        if (respuesta.isPresent()) {
+            Autor autor = respuesta.get();
+            autor.setAutorActivo(false); // seteamos el autor como INACTIVO
         } else {
             throw new MyException("El autor con el ID especificado no existe.");
         }

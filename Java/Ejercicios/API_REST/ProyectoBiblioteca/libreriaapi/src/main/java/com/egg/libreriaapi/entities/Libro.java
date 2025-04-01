@@ -1,6 +1,5 @@
 package com.egg.libreriaapi.entities;
 
-import java.util.Date;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,7 +7,7 @@ import lombok.Data;
 @Entity
 @Table(name = "libro")
 public class Libro {
-  
+
   @Id
   @Column(name = "isbn")
   private Long isbn;
