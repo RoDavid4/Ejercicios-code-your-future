@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.egg.libreriaapi.exceptions.MyException;
+import com.egg.libreriaapi.modelos.AutorModificarEstadoDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,7 @@ public class AutorService {
         return autorRepository.getReferenceById (id);
     }
 
+    /*                                          Sin DTO
     // Método público para modificar un Autor
     @Transactional
     public void modificarAutor(String nombre, UUID id) throws MyException {
@@ -55,8 +58,27 @@ public class AutorService {
            
         if (respuesta.isPresent()) {
             Autor autor = respuesta.get();
-            if (autor.getAutorActivo()){
+            if (autor.getAutorActivo()){ // Solo se modifican autores ACTIVOS
                 autor.setNombre(nombre);
+            } else {
+                throw new MyException("El autor no está activo");
+            }
+        } else {
+            throw new MyException("El autor con el ID especificado no existe.");
+        }
+    } */
+
+    @Transactional                                                          // Con DTO
+    public void modificarAutor(AutorModificarEstadoDTO autorDTO) throws MyException {
+        validarNombre(autorDTO.getNombre()); // Validación del nombre
+        validarId(autorDTO.getId()); // Validación del ID
+
+        Optional<Autor> respuesta = autorRepository.findById(autorDTO.getId());
+           
+        if (respuesta.isPresent()) {
+            Autor autor = respuesta.get();
+            if (autor.getAutorActivo()){ // Solo se modifican autores ACTIVOS
+                autor.setNombre(autorDTO.getNombre());
             } else {
                 throw new MyException("El autor no está activo");
             }

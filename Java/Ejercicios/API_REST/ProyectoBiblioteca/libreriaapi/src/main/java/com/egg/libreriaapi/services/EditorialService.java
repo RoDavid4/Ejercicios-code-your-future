@@ -6,10 +6,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.egg.libreriaapi.exceptions.MyException;
+import com.egg.libreriaapi.modelos.EditorialCreateDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.egg.libreriaapi.entities.Autor;
 import com.egg.libreriaapi.entities.Editorial;
 import com.egg.libreriaapi.repositories.EditorialRepository;
 
@@ -20,7 +20,7 @@ public class EditorialService {
     @Autowired
     private EditorialRepository editorialRepository;
 
-    @Transactional
+    /* @Transactional // Sin DTO
     public void crearEditorial(String nombre) throws MyException {
         validarEditorial(nombre);
 
@@ -29,6 +29,19 @@ public class EditorialService {
         editorial.setEditorialActiva(true);
 
         editorialRepository.save(editorial);
+    } */
+
+    @Transactional //con DTO
+    public void crearEditorial(EditorialCreateDTO editorialCreateDTO) throws MyException{
+
+        validarEditorial(editorialCreateDTO.getNombre());
+
+        Editorial editorialNueva = new Editorial();
+        
+        editorialNueva.setNombre(editorialCreateDTO.getNombre());
+        editorialNueva.setEditorialActiva(true);
+        
+        editorialRepository.save(editorialNueva);
     }
 
     @Transactional(readOnly = true)
@@ -37,6 +50,15 @@ public class EditorialService {
         List<Editorial> editoriales = new ArrayList<>();
 
         editoriales = editorialRepository.findAll();
+        return editoriales;
+    }
+
+    
+
+    @Transactional(readOnly = true)
+    public List<Editorial> listarActivas(boolean activa) {
+        List<Editorial> editoriales = new ArrayList<>();
+        editoriales = editorialRepository.editorialActiva(activa);
         return editoriales;
     }
 
@@ -69,11 +91,24 @@ public class EditorialService {
         validarEditorial(id);
 
         Optional<Editorial> respuesta = editorialRepository.findById(id);
-        if (respuesta.isPresent()) {
+        if (respuesta.isPresent() && respuesta.get().getEditorialActiva()) {
             Editorial editorial = respuesta.get();
             editorial.setEditorialActiva(false); // seteamos la editorial como INACTIVA
         } else {
-            throw new MyException("La editorial no existe");
+            throw new MyException("La editorial no existe o ha sido eliminada");
+        }
+    }
+
+    @Transactional
+    public void reactivarEditorial(UUID id) throws MyException {
+        validarEditorial(id);
+
+        Optional<Editorial> respuesta = editorialRepository.findById(id);
+        if (respuesta.isPresent() && !respuesta.get().getEditorialActiva()) {
+            Editorial editorial = respuesta.get();
+            editorial.setEditorialActiva(true); // seteamos la editorial como ACTIVA
+        } else {
+            throw new MyException("La editorial no se puede reactivar");
         }
     }
 

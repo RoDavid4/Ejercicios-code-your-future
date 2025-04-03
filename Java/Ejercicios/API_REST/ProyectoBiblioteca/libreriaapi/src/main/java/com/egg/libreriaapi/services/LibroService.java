@@ -2,116 +2,199 @@ package com.egg.libreriaapi.services;
 
 import com.egg.libreriaapi.entities.*;
 import com.egg.libreriaapi.exceptions.MyException;
+import com.egg.libreriaapi.modelos.LibroCreateDTO;
+import com.egg.libreriaapi.modelos.LibroListarDTO;
 import com.egg.libreriaapi.repositories.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LibroService {
-    @Autowired
-    private LibroRepository libroRepository;
-    @Autowired
-    private AutorRepository autorRepository;
-    @Autowired
-    private EditorialRepository editorialRepository;
+  @Autowired private LibroRepository libroRepository;
+  @Autowired private AutorRepository autorRepository;
+  @Autowired private EditorialRepository editorialRepository;
+  @Autowired private AutorService autorService;
+  @Autowired private EditorialService editorialService;
 
-    @Transactional
-    public void crearLibro(
-            Long isbn, String titulo, Integer ejemplares, UUID id_autor, UUID id_editorial) throws MyException {
+  @Transactional
+  public void crearLibro(LibroCreateDTO libroCreateDTO) throws MyException {
 
-        validarLibro(isbn, titulo, ejemplares, id_autor, id_editorial);
-        Optional<Autor> rtaAutor = autorRepository.findById(id_autor);
-        Optional<Editorial> rtaEditorial = editorialRepository.findById(id_editorial);
+    validarLibro(
+        libroCreateDTO.getIsbn(),
+        libroCreateDTO.getTitulo(),
+        libroCreateDTO.getEjemplares(),
+        libroCreateDTO.getIdAutor(),
+        libroCreateDTO.getIdEditorial());
+    Libro libroNvo = new Libro();
 
-        if (!rtaAutor.isPresent() || !rtaEditorial.isPresent()) {
-            throw new MyException("El autor o la editorial no existen");
-        } else {
-            Autor autor = rtaAutor.get();
-            Editorial editorial = rtaEditorial.get();
+    libroNvo.setIsbn(libroCreateDTO.getIsbn());
+    libroNvo.setTitulo(libroCreateDTO.getTitulo());
+    libroNvo.setEjemplares(libroCreateDTO.getEjemplares());
+    libroNvo.setLibroActivo(true);
 
-            Libro libro = new Libro();
-            libro.setIsbn(isbn);
-            libro.setTitulo(titulo);
-            libro.setEjemplares(ejemplares);
-            libro.setLibroActivo(true);
-            libro.setAutor(autor);
-            libro.setEditorial(editorial);
+    libroNvo.setAutor(autorService.getOne(libroCreateDTO.getIdAutor()));
+    libroNvo.setEditorial(editorialService.getOne(libroCreateDTO.getIdEditorial()));
 
-            libroRepository.save(libro);
-        }
+    libroRepository.save(libroNvo);
+  }
+
+  @Transactional(readOnly = true)
+  public List<Libro> listarLibros() {
+
+    List<Libro> libros = new ArrayList<>();
+
+    libros = libroRepository.findAll();
+    return libros;
+  }
+
+  @Transactional(readOnly = true)
+  public Libro getOne(Long id) {
+    return libroRepository.getReferenceById(id);
+  }
+
+  @Transactional
+  public void modificarLibro(
+      Long isbn, String titulo, Integer ejemplares, UUID autor, UUID editorial) throws MyException {
+    validarLibro(isbn, titulo, ejemplares, autor, editorial);
+
+    Optional<Libro> respuestaL = libroRepository.findById(isbn);
+    Optional<Autor> respuestaA = autorRepository.findById(autor);
+    Optional<Editorial> respuestaE = editorialRepository.findById(editorial);
+
+    if (respuestaL.isPresent() && respuestaA.isPresent() && respuestaE.isPresent()) {
+
+      Libro libro = respuestaL.get();
+      if (libro.getLibroActivo()) {
+        libro.setAutor(respuestaA.get());
+        libro.setEditorial(respuestaE.get());
+        libro.setEjemplares(ejemplares);
+        libro.setTitulo(titulo);
+      } else {
+        throw new MyException("El libro no está activo");
+      }
+
+    } else {
+      throw new MyException("Hay datos faltantes o incorrectos");
     }
+  }
 
-    @Transactional(readOnly = true)
-    public List<Libro> listarLibros() {
+  @Transactional
+  public void borrarLibro(Long isbn) throws MyException {
+    Optional<Libro> libroOpt = libroRepository.findById(isbn);
 
-        List<Libro> libros = new ArrayList<>();
+    if (libroOpt.isPresent()) {
+      Libro libro = libroOpt.get();
 
-        libros = libroRepository.findAll();
-        return libros;
+      libro.setLibroActivo(false);
+    } else {
+      throw new MyException("El libro con ISBN " + isbn + " no existe en la base de datos.");
     }
+  }
 
-    @Transactional(readOnly = true)
-    public Libro  getOne(Long id) {
-        return libroRepository.getReferenceById (id);
-    }
+  @Transactional(readOnly = true)
+  public List<LibroListarDTO> listarActivos(boolean activo) {
+    List<LibroListarDTO> libros = new ArrayList<>();
+    libros = libroRepository.encontrarActivos(activo);
+    return libros;
+  }
 
-    @Transactional
-    public void modificarLibro(
-            Long isbn, String titulo, Integer ejemplares, UUID autor, UUID editorial) throws MyException {
-        validarLibro(isbn, titulo, ejemplares, autor, editorial);
+  @Transactional(readOnly = true)
+  public List<LibroListarDTO> listarPorAutor(Autor autor) {
+    List<LibroListarDTO> libros = new ArrayList<>();
+    libros = libroRepository.buscarPorAutor(autor);
+    return libros;
+  }
 
-        Optional<Libro> respuestaL = libroRepository.findById(isbn);
-        Optional<Autor> respuestaA = autorRepository.findById(autor);
-        Optional<Editorial> respuestaE = editorialRepository.findById(editorial);
-
-        if (respuestaL.isPresent() && respuestaA.isPresent() && respuestaE.isPresent()) {
-            
-            Libro libro = respuestaL.get();
-            if (libro.getLibroActivo()) {
-                libro.setAutor(respuestaA.get());
-                libro.setEditorial(respuestaE.get());
-                libro.setEjemplares(ejemplares);
-                libro.setTitulo(titulo);
-            } else{
-                throw new MyException("El libro no está activo");
-            }
-            
-        } else {
-            throw new MyException("Hay datos faltantes o incorrectos");
-        }
-    }
-
+  @Transactional(readOnly = true)
+public List<LibroListarDTO> listarPorAutor(UUID autorId) throws MyException {
     
-    @Transactional
-    public void borrarLibro(Long isbn) throws MyException {
-        Optional<Libro> libroOpt = libroRepository.findById(isbn);
+    validarIdAutor(autorId);
+    Autor autor = autorRepository.getReferenceById(autorId);
+    validarEstadoAutor(autor);
 
-        if (libroOpt.isPresent()) {
-            Libro libro = libroOpt.get();
-            
-            libro.setLibroActivo(false);
-        } else {
-            throw new MyException("El libro con ISBN " + isbn + " no existe en la base de datos.");
-        }
+    List<LibroListarDTO> libros = new ArrayList<>();
+    libros = libroRepository.buscarPorAutor(autor);
+    return libros;
+}
+
+  @Transactional(readOnly = true)
+  public List<LibroListarDTO> listarPorEditorial(UUID editorialId) throws MyException {
+
+    validarIdEditorial(editorialId);
+    Editorial editorial = editorialRepository.getReferenceById(editorialId);
+    validarEstadoEditorial(editorial);
+
+    List<LibroListarDTO> libros = new ArrayList<>();
+    libros = libroRepository.buscarPorEditorial(editorial);
+    return libros;
+  }
+
+  @Transactional(readOnly = true)
+  public List<LibroListarDTO> listarPorAutorEditorial(UUID autorId, UUID editorialId) throws MyException{
+
+    validarIdAutor(autorId);
+    validarIdEditorial(editorialId);
+    Autor autor = autorRepository.getReferenceById(autorId);
+    Editorial editorial = editorialRepository.getReferenceById(editorialId);
+    validarEstadoAutor(autor);
+    validarEstadoEditorial(editorial);
+
+    List<LibroListarDTO> libros = new ArrayList<>();
+    libros = libroRepository.buscarPorAutorYEditorial(autor, editorial);
+    return libros;
+  }
+
+  private void validarLibro(
+      Long isbn, String titulo, Integer ejemplares, UUID autor, UUID editorial) throws MyException {
+    if (isbn == null
+        || titulo == null
+        || titulo.isEmpty()
+        || ejemplares == null
+        || autor == null
+        || editorial == null) {
+      throw new MyException("Los datos proporcionados son inválidos o están incompletos.");
+    }
+  }
+
+  private void validarIdAutor(UUID autorId) throws MyException {
+    if (autorId == null) {
+        throw new MyException("El ID del autor no puede ser nulo.");
     }
 
-    private void validarLibro(
-            Long isbn, String titulo, Integer ejemplares, UUID autor, UUID editorial) throws MyException{
-        if (isbn == null
-                || titulo == null
-                || titulo.isEmpty()
-                || ejemplares == null
-                || autor == null
-                || editorial == null) {
-            throw new MyException(
-                    "Los datos proporcionados son inválidos o están incompletos.");
-        }
+    // Verificar existencia del autor
+    boolean existe = autorRepository.existsById(autorId);
+    if (!existe) {
+        throw new MyException("El autor con el ID especificado no existe.");
     }
+}
+
+private void validarIdEditorial(UUID editorialId) throws MyException {
+    if (editorialId == null) {
+        throw new MyException("El ID de la editorial no puede ser nulo.");
+    }
+
+    // Verificar existencia de la editorial
+    boolean existe = editorialRepository.existsById(editorialId);
+    if (!existe) {
+        throw new MyException("La editorial con el ID especificado no existe.");
+    }
+}
+
+private void validarEstadoAutor(Autor autor) throws MyException {
+
+    if (!autor.getAutorActivo()) {
+        throw new MyException("El autor no está activo.");
+    }
+}
+
+private void validarEstadoEditorial(Editorial editorial) throws MyException {
+    if (!editorial.getEditorialActiva()) {
+        throw new MyException("La editorial no esta activa");
+    }
+}
 }
