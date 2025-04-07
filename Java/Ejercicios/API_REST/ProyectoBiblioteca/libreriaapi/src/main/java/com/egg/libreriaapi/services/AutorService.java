@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.egg.libreriaapi.exceptions.MyException;
+import com.egg.libreriaapi.modelos.AutorDTO;
 import com.egg.libreriaapi.modelos.AutorModificarEstadoDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.egg.libreriaapi.entities.Autor;
 import com.egg.libreriaapi.repositories.AutorRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +48,26 @@ public class AutorService {
     public Autor getOne(UUID id) throws MyException {
         validarId(id);
         return autorRepository.getReferenceById (id);
+    }
+
+    @Transactional(readOnly = true)
+    public AutorDTO obtenerAutorDTO(UUID id) {
+        Optional<Autor> optionalAutor = autorRepository.findById(id);
+        Autor autor = null;
+        try {
+            // Verificamos si el valor está presente en el Optional
+            if (optionalAutor.isPresent()) {
+                autor = optionalAutor.get();
+            } else {
+                throw new EntityNotFoundException("No se encontró el autor con ID: " + id);
+            }
+        } catch (EntityNotFoundException e) {
+            // Manejo de la excepción en caso de que no se encuentre la entidad
+            throw e; // Lanzamos la excepción personalizada
+        }
+       
+        // Mapear la entidad a DTO
+        return new AutorDTO(autor.getId(), autor.getNombre());
     }
 
     /*                                          Sin DTO

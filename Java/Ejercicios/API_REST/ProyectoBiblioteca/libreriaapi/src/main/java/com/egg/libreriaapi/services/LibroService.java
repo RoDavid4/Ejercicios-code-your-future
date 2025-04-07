@@ -4,7 +4,9 @@ import com.egg.libreriaapi.entities.*;
 import com.egg.libreriaapi.exceptions.MyException;
 import com.egg.libreriaapi.modelos.LibroCreateDTO;
 import com.egg.libreriaapi.modelos.LibroListarDTO;
+import com.egg.libreriaapi.modelos.LibroMostrarDTO;
 import com.egg.libreriaapi.repositories.*;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +57,30 @@ public class LibroService {
   @Transactional(readOnly = true)
   public Libro getOne(Long id) {
     return libroRepository.getReferenceById(id);
+  }
+
+  @Transactional(readOnly = true)
+  public LibroMostrarDTO obtenerLibroDTO(Long isbn) {
+    Optional<Libro> optionalLibro = libroRepository.findById(isbn);
+    Libro libro = null;
+    try {
+      // Verificamos si el valor está presente en el Optional
+      if (optionalLibro.isPresent()) {
+        libro = optionalLibro.get();
+      } else {
+        throw new EntityNotFoundException("No se encontró el libro con ISBN: " + isbn);
+      }
+      // Manejo de la excepción en caso de que no se encuentre la entidad
+    } catch (Exception e) {
+      throw e;
+    }
+    // Mapear la entidad a DTO
+    return new LibroMostrarDTO(
+        isbn,
+        libro.getTitulo(),
+        libro.getEjemplares(),
+        libro.getAutor().getNombre(),
+        libro.getEditorial().getNombre());
   }
 
   @Transactional
@@ -111,8 +137,8 @@ public class LibroService {
   }
 
   @Transactional(readOnly = true)
-public List<LibroListarDTO> listarPorAutor(UUID autorId) throws MyException {
-    
+  public List<LibroListarDTO> listarPorAutor(UUID autorId) throws MyException {
+
     validarIdAutor(autorId);
     Autor autor = autorRepository.getReferenceById(autorId);
     validarEstadoAutor(autor);
@@ -120,7 +146,7 @@ public List<LibroListarDTO> listarPorAutor(UUID autorId) throws MyException {
     List<LibroListarDTO> libros = new ArrayList<>();
     libros = libroRepository.buscarPorAutor(autor);
     return libros;
-}
+  }
 
   @Transactional(readOnly = true)
   public List<LibroListarDTO> listarPorEditorial(UUID editorialId) throws MyException {
@@ -135,7 +161,8 @@ public List<LibroListarDTO> listarPorAutor(UUID autorId) throws MyException {
   }
 
   @Transactional(readOnly = true)
-  public List<LibroListarDTO> listarPorAutorEditorial(UUID autorId, UUID editorialId) throws MyException{
+  public List<LibroListarDTO> listarPorAutorEditorial(UUID autorId, UUID editorialId)
+      throws MyException {
 
     validarIdAutor(autorId);
     validarIdEditorial(editorialId);
@@ -163,38 +190,38 @@ public List<LibroListarDTO> listarPorAutor(UUID autorId) throws MyException {
 
   private void validarIdAutor(UUID autorId) throws MyException {
     if (autorId == null) {
-        throw new MyException("El ID del autor no puede ser nulo.");
+      throw new MyException("El ID del autor no puede ser nulo.");
     }
 
     // Verificar existencia del autor
     boolean existe = autorRepository.existsById(autorId);
     if (!existe) {
-        throw new MyException("El autor con el ID especificado no existe.");
+      throw new MyException("El autor con el ID especificado no existe.");
     }
-}
+  }
 
-private void validarIdEditorial(UUID editorialId) throws MyException {
+  private void validarIdEditorial(UUID editorialId) throws MyException {
     if (editorialId == null) {
-        throw new MyException("El ID de la editorial no puede ser nulo.");
+      throw new MyException("El ID de la editorial no puede ser nulo.");
     }
 
     // Verificar existencia de la editorial
     boolean existe = editorialRepository.existsById(editorialId);
     if (!existe) {
-        throw new MyException("La editorial con el ID especificado no existe.");
+      throw new MyException("La editorial con el ID especificado no existe.");
     }
-}
+  }
 
-private void validarEstadoAutor(Autor autor) throws MyException {
+  private void validarEstadoAutor(Autor autor) throws MyException {
 
     if (!autor.getAutorActivo()) {
-        throw new MyException("El autor no está activo.");
+      throw new MyException("El autor no está activo.");
     }
-}
+  }
 
-private void validarEstadoEditorial(Editorial editorial) throws MyException {
+  private void validarEstadoEditorial(Editorial editorial) throws MyException {
     if (!editorial.getEditorialActiva()) {
-        throw new MyException("La editorial no esta activa");
+      throw new MyException("La editorial no esta activa");
     }
-}
+  }
 }

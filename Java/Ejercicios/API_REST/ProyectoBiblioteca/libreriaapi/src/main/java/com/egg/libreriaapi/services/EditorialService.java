@@ -7,11 +7,14 @@ import java.util.UUID;
 
 import com.egg.libreriaapi.exceptions.MyException;
 import com.egg.libreriaapi.modelos.EditorialCreateDTO;
+import com.egg.libreriaapi.modelos.EditorialDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.egg.libreriaapi.entities.Editorial;
 import com.egg.libreriaapi.repositories.EditorialRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,8 +56,6 @@ public class EditorialService {
         return editoriales;
     }
 
-    
-
     @Transactional(readOnly = true)
     public List<Editorial> listarActivas(boolean activa) {
         List<Editorial> editoriales = new ArrayList<>();
@@ -66,6 +67,26 @@ public class EditorialService {
     public Editorial  getOne(UUID id) throws MyException {
         validarEditorial(id);
         return editorialRepository.getReferenceById (id);
+    }
+
+    @Transactional(readOnly = true)
+    public EditorialDTO obtenerEditorialDTO(UUID id) {
+        Optional<Editorial> optionalEditorial = editorialRepository.findById(id);
+        Editorial editorial = null;
+        try {
+            // Verificamos si el valor está presente en el Optional
+            if (optionalEditorial.isPresent()) {
+                editorial = optionalEditorial.get();
+            } else {
+                throw new EntityNotFoundException("No se encontró la editorial con ID: " + id);
+            }
+        } catch (EntityNotFoundException e) {
+            // Manejo de la excepción en caso de que no se encuentre la entidad
+            throw e; // Lanzamos la excepción personalizada
+        }
+       
+        // Mapear la entidad a DTO
+        return new EditorialDTO(editorial.getId(), editorial.getNombre());
     }
 
     @Transactional

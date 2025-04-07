@@ -3,7 +3,9 @@ package com.egg.libreriaapi.controllers;
 import com.egg.libreriaapi.entities.Editorial;
 import com.egg.libreriaapi.exceptions.MyException;
 import com.egg.libreriaapi.modelos.EditorialCreateDTO;
+import com.egg.libreriaapi.modelos.EditorialDTO;
 import com.egg.libreriaapi.services.EditorialService;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -104,6 +107,24 @@ public class EditorialController {
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .body("Ocurrió un error inesperado.");
+    }
+  }
+
+  @GetMapping("/listarEditorial/{id}")
+  public ResponseEntity<EditorialDTO> listarEditorial(@PathVariable UUID id) {
+    try {
+      // Llamamos al servicio para obtener el DTO
+      EditorialDTO editorialDTO = editorialService.obtenerEditorialDTO(id);
+      return ResponseEntity.ok(editorialDTO);
+    } catch (EntityNotFoundException e) {
+      // Si no se encuentra la entidad, devolvemos un 404
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body(
+              null); // Se puede devolver null, pero también podrías enviar un mensaje de error en
+                     // el cuerpo
+    } catch (Exception e) {
+      // En caso de error general, devolvemos un 500
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
 }

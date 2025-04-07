@@ -2,13 +2,18 @@ package com.egg.libreriaapi.controllers;
 
 import com.egg.libreriaapi.modelos.LibroCreateDTO;
 import com.egg.libreriaapi.modelos.LibroListarDTO;
+import com.egg.libreriaapi.modelos.LibroMostrarDTO;
 import com.egg.libreriaapi.services.LibroService;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +34,18 @@ public class LibroController {
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
+  }
+
+  @GetMapping("/listarLibro/{id}")
+  public ResponseEntity<LibroMostrarDTO> obtenerLibro(@PathVariable Long id) {
+    try {
+      LibroMostrarDTO libroDTO = libroService.obtenerLibroDTO(id);
+      return ResponseEntity.ok(libroDTO);
+      } catch (EntityNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404
+      } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();  //500
+      }
   }
 
   @GetMapping("/listarActivos")
