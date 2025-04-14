@@ -85,27 +85,26 @@ public class LibroService {
 
   @Transactional
   public void modificarLibro(
-      Long isbn, String titulo, Integer ejemplares, UUID autor, UUID editorial) throws MyException {
-    validarLibro(isbn, titulo, ejemplares, autor, editorial);
+      LibroCreateDTO libroDTO) throws MyException {
+    validarLibro(libroDTO.getIsbn(), libroDTO.getTitulo(), libroDTO.getEjemplares(), libroDTO.getIdAutor(), libroDTO.getIdEditorial());
 
-    Optional<Libro> respuestaL = libroRepository.findById(isbn);
-    Optional<Autor> respuestaA = autorRepository.findById(autor);
-    Optional<Editorial> respuestaE = editorialRepository.findById(editorial);
-
-    if (respuestaL.isPresent() && respuestaA.isPresent() && respuestaE.isPresent()) {
+    Optional<Libro> respuestaL = libroRepository.findById(libroDTO.getIsbn());
+    Optional<Autor> respuestaA = autorRepository.findById(libroDTO.getIdAutor());
+    Optional<Editorial> respuestaE = editorialRepository.findById(libroDTO.getIdEditorial());
+    if (respuestaL.isPresent()) {
 
       Libro libro = respuestaL.get();
       if (libro.getLibroActivo()) {
         libro.setAutor(respuestaA.get());
         libro.setEditorial(respuestaE.get());
-        libro.setEjemplares(ejemplares);
-        libro.setTitulo(titulo);
+        libro.setEjemplares(libroDTO.getEjemplares());
+        libro.setTitulo(libroDTO.getTitulo());
       } else {
         throw new MyException("El libro no está activo");
       }
 
     } else {
-      throw new MyException("Hay datos faltantes o incorrectos");
+      throw new MyException("El ISBN del libro es incorrecto");
     }
   }
 
@@ -113,12 +112,24 @@ public class LibroService {
   public void borrarLibro(Long isbn) throws MyException {
     Optional<Libro> libroOpt = libroRepository.findById(isbn);
 
-    if (libroOpt.isPresent()) {
+    if (libroOpt.isPresent() && libroOpt.get().getLibroActivo()) {
       Libro libro = libroOpt.get();
 
       libro.setLibroActivo(false);
     } else {
-      throw new MyException("El libro con ISBN " + isbn + " no existe en la base de datos.");
+      throw new MyException("El libro con ISBN " + isbn + " no existe o esta inactivo.");
+    }
+  }
+
+  @Transactional
+  public void reactivarLibro(Long isbn) throws MyException {
+    Optional<Libro> libroOpt = libroRepository.findById(isbn);
+
+    if (libroOpt.isPresent() && !libroOpt.get().getLibroActivo()) {
+      Libro libro = libroOpt.get();
+      libro.setLibroActivo(true);
+    } else {
+      throw new MyException("El libro con ISBN " + isbn + " no puede ser reactivado.");
     }
   }
 
@@ -181,10 +192,12 @@ public class LibroService {
     if (isbn == null
         || titulo == null
         || titulo.isEmpty()
-        || ejemplares == null
-        || autor == null
-        || editorial == null) {
+        || ejemplares == null) {
       throw new MyException("Los datos proporcionados son inválidos o están incompletos.");
+    } else {
+      
+      validarIdAutor(autor);
+      validarIdEditorial(editorial);
     }
   }
 
