@@ -5,12 +5,9 @@ import com.egg.libreriaapi.exceptions.MyException;
 import com.egg.libreriaapi.modelos.AutorDTO;
 import com.egg.libreriaapi.modelos.AutorModificarEstadoDTO;
 import com.egg.libreriaapi.services.AutorService;
-
 import jakarta.persistence.EntityNotFoundException;
-
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,12 +57,21 @@ public class AutorController {
     } catch (EntityNotFoundException e) {
       // Si no se encuentra la entidad, devolvemos un 404
       return ResponseEntity.status(HttpStatus.NOT_FOUND)
-          .body(
-              null); // Se puede devolver null, pero también podrías enviar un mensaje de error en
-                     // el cuerpo
+          .body(null); // Se puede devolver null, pero también podrías enviar un mensaje de error en
+      // el cuerpo
     } catch (Exception e) {
       // En caso de error general, devolvemos un 500
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  @GetMapping("listarEstado")
+  public ResponseEntity<List<Autor>> listarAutoresEstado(@RequestParam Boolean estado) {
+    try {
+      List<Autor> autores = autorService.listarActivos(estado); //
+      return new ResponseEntity<>(autores, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 

@@ -1,0 +1,537 @@
+{
+	"info": {
+		"_postman_id": "b376d9e9-dade-4db5-8a49-cf60e560a89d",
+		"name": "Libreria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "43666710",
+		"_collection_link": "https://david-8052541.postman.co/workspace/Egg-API-Rest~7e5a54a1-503f-4b9d-8bae-282972dc6f29/collection/43666710-b376d9e9-dade-4db5-8a49-cf60e560a89d?action=share&source=collection_link&creator=43666710"
+	},
+	"item": [
+		{
+			"name": "Libro",
+			"item": [
+				{
+					"name": "crear-libro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isbn\" : 62215310,\r\n    \"titulo\" : \"nuevo libro para test de otra editorial pero bien 2\",\r\n    \"ejemplares\" : 52,\r\n    \"idAutor\" : \"58593917-7734-4542-8d0b-5cda002b7e60\",\r\n    \"idEditorial\" : \"de8f11a2-0516-4073-904b-9150a80b5628\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/libro/crear"
+					},
+					"response": []
+				},
+				{
+					"name": "listar-libro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/libro/listarLibro/128412310"
+					},
+					"response": []
+				},
+				{
+					"name": "listar-libros-activos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/libro/listarActivos?activo=true",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"libro",
+								"listarActivos"
+							],
+							"query": [
+								{
+									"key": "activo",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar-libros-inactivos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/libro/listarActivos?activo=false",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"libro",
+								"listarActivos"
+							],
+							"query": [
+								{
+									"key": "activo",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar-por-autor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/libro/listarAutor?autor=58593917-7734-4542-8d0b-5cda002b7e60",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"libro",
+								"listarAutor"
+							],
+							"query": [
+								{
+									"key": "autor",
+									"value": "58593917-7734-4542-8d0b-5cda002b7e60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar-por-editorial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/libro/listarEditorial?editorial=270b13f6-ebbf-4449-b4cf-c26512b961b1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"libro",
+								"listarEditorial"
+							],
+							"query": [
+								{
+									"key": "editorial",
+									"value": "270b13f6-ebbf-4449-b4cf-c26512b961b1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar-por-autor-editorial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/libro/listarAutorEditorial?autor=58593917-7734-4542-8d0b-5cda002b7e60&editorial=270b13f6-ebbf-4449-b4cf-c26512b961b1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"libro",
+								"listarAutorEditorial"
+							],
+							"query": [
+								{
+									"key": "autor",
+									"value": "58593917-7734-4542-8d0b-5cda002b7e60"
+								},
+								{
+									"key": "editorial",
+									"value": "270b13f6-ebbf-4449-b4cf-c26512b961b1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar-libro",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isbn\" : 62215310,\r\n    \"titulo\" : \"nuevo libro para test de otra editorial pero bien bien 2\",\r\n    \"ejemplares\" : 12,\r\n    \"idAutor\" : \"58593917-7734-4542-8d0b-5cda002b7e60\",\r\n    \"idEditorial\" : \"2f6add27-b2e1-4b57-95fc-681a8b795e3b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/libro/modificar"
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar-libro",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/libro/eliminar"
+					},
+					"response": []
+				},
+				{
+					"name": "reactivar-libro",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/libro/reactivar"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autor",
+			"item": [
+				{
+					"name": "crear-autor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/autor/crear?nombre=OtroAutor",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"autor",
+								"crear"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "OtroAutor"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar-autor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/autor/listarAutor/ecf2dbe6-3806-4c60-8144-d946512658e4"
+					},
+					"response": []
+				},
+				{
+					"name": "listar-autores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/autor/listar"
+					},
+					"response": []
+				},
+				{
+					"name": "listar-autores-activos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/autor/listarEstado?estado=true",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"autor",
+								"listarEstado"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar-autores-inactivos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/autor/listarEstado?estado=false",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"autor",
+								"listarEstado"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar-autor",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"58593917-7734-4542-8d0b-5cda002b7e60\",\r\n    \"nombre\" : \"Hugo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/autor/modificar"
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar-autor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "ecdd277e-3f99-45c5-a4c5-7320298b0f92",
+									"description": "id del autor a eliminar",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/autor/eliminar"
+					},
+					"response": []
+				},
+				{
+					"name": "reactivar-autor",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "ecdd277e-3f99-45c5-a4c5-7320298b0f92",
+									"description": "id del autor a reactivar",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/autor/reactivar"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Editorial",
+			"item": [
+				{
+					"name": "crear-editorial",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Margarita\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/editorial/crear"
+					},
+					"response": []
+				},
+				{
+					"name": "listar-editorial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/editorial/listarEditorial/d819ebc0-4c4b-4b41-ae52-699a18fd2d3c"
+					},
+					"response": []
+				},
+				{
+					"name": "listar-editoriales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/editorial/listar"
+					},
+					"response": []
+				},
+				{
+					"name": "listar-editoriales-activas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/editorial/listarEstado?estado=true",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"editorial",
+								"listarEstado"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar-editoriales-inactivas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/editorial/listarEstado?estado=false",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"editorial",
+								"listarEstado"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar-editorial",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "OtraPrueba",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "2f6add27-b2e1-4b57-95fc-681a8b795e3b",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/editorial/modificar"
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar-editorial",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "d819ebc0-4c4b-4b41-ae52-699a18fd2d3c",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/editorial/eliminar"
+					},
+					"response": []
+				},
+				{
+					"name": "reactivar-editorial",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "d819ebc0-4c4b-4b41-ae52-699a18fd2d3c",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/editorial/reactivar"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

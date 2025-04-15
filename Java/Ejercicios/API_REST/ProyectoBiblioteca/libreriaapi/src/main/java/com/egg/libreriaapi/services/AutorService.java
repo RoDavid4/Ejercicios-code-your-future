@@ -6,6 +6,7 @@ import com.egg.libreriaapi.modelos.AutorDTO;
 import com.egg.libreriaapi.modelos.AutorModificarEstadoDTO;
 import com.egg.libreriaapi.repositories.AutorRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,6 +36,14 @@ public class AutorService {
   @Transactional(readOnly = true)
   public List<Autor> listarAutores() {
     return autorRepository.findAll();
+  }
+
+  // Método público para listar editoriales activas o inactivas dependiendo del parametro logico
+  @Transactional(readOnly = true)
+  public List<Autor> listarActivos(boolean activo) {
+    List<Autor> autores = new ArrayList<>();
+    autores = autorRepository.autorActivo(activo);
+    return autores;
   }
 
   @Transactional(readOnly = true)
