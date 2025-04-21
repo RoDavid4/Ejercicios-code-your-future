@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head :: head ('La Casa de Electricidad')}"></head>
+
+<body>
+    <div class="main-container">
+
+    <header class="header-container">
+            <h1>La Casa de Electricidad </h1>
+            <nav th:replace="~{fragments/navbar :: nav}"></nav>
+    </header>
+
+    <div th:replace="~{fragments/succesorerror :: div}"></div>
+
+    <main>
+        <section class="welcome">
+            <h2>Bienvenido a tu panel</h2>
+            <p>Accede a las opciones para gestionar fábricas y artículos.</p>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    </div>
+</body>
+</html>

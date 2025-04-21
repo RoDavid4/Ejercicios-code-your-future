@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head :: head ('Modificar Fábrica')}"></head>
+
+<body>
+<div class="main-container">
+<header class="header-container">
+    <h1>Modificar Fábrica </h1>
+    <nav th:replace="~{fragments/navbar :: nav}"></nav>
+</header>
+
+<main>
+    <section class="form-container">
+        <h2>Formulario de Modificación</h2>
+        <form th:action="@{/fabrica/modificar/__${fabrica.idFabrica}__}" method="POST">
+            <label for="nombre">Nombre de la Fábrica:</label>
+            <input type="text" id="nombre" name="nombreFabrica"
+                   th:placeholder="${fabrica.nombreFabrica}"
+                   placeholder="Ingrese el nuevo nombre de la fábrica" required>
+            <button type="submit" class="btn">Guardar Cambios</button>
+        </form>
+
+        <!-- Mensajes de éxito o error -->
+        <div th:replace="~{fragments/succesorerror :: div}"></div>
+
+    </section>
+    <section class="text-center container">
+        <div class="row mt-3">
+            <div class="divVolver">
+                <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
+</body>
+</html>

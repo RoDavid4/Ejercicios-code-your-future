@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head :: head ('Gestión de Artículos')}"></head>
+
+<body>
+<div class="main-container">
+<!-- Navbar -->
+    <header class="header-container">
+        <h1>La Casa de Electricidad </h1>
+        <nav th:replace="~{fragments/navbar :: nav}"></nav>
+    </header>
+
+<main>
+    <section class="form-container">
+        <h2>Gestión de Artículos</h2>
+
+        <div th:replace="~{fragments/succesorerror :: div}"></div>
+
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/articulo/registrar}" class="btn btn-derecha">Cargar nuevo Artículo</a>
+
+        <!-- Tabla para mostrar las fábricas -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nº Artículo</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Imagen</th>
+                <th>Fabrica</th>
+                <th sec:authorize="hasRole('ROLE_ADMIN')" >Acciones</th>
+            </tr>
+            </thead>
+            <tbody th:each="articulo : ${articulos}">
+            <tr>
+                <th scope="row" th:text="${articulo.idArticulo}"></th>
+                <td th:text="${articulo.nroArticulo}"></td>
+                <td th:text="${articulo.nombreArticulo}"></td>
+                <td th:text="${articulo.descripcionArticulo}"></td>
+                <td><img class="logo" th:src="@{/imagen/articulo/__${articulo.idArticulo}__}" alt="Img Articulo"></td>
+                <td th:text="${articulo.fabrica.nombreFabrica}"></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')" class="d-flex gap-2 align-items-center">
+                    <!-- Botón de Modificar -->
+                    <a th:href="@{/articulo/modificar/__${articulo.idArticulo}__}" class="btn btn-primary btn-sm d-flex align-items-center">
+                        <i class="fas fa-feather-alt me-2"></i> Modificar
+                    </a>
+                    <!-- Botón de Eliminar -->
+                    <form th:action="@{/articulo/eliminar/__${articulo.idArticulo}__}" method="POST" class="delete-form">
+                        <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center" onclick="return confirm('¿Estás seguro?')">
+                            <i class="fas fa-trash-alt me-2"></i> Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </section>
+    <section class="text-center container">
+        <div class="row mt-3">
+            <div class="divVolver">
+                <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
+</body>
+</html>

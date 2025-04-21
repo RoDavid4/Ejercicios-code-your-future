@@ -1,11 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head :: head}"></head>
+<!-- MODIFICAMOS NUESTRO ARCHIVO INDEX PARA QUE SEA LA VISTA AL INGRESAR A LA PÁGINA SIN LOGGEARNOS Y CREAMOS UN ARCHIVO INICIO PARA
+    LA VISTA QUE VEREMOS AL INICIAR SESION -->
 <body>
-    <h1>Mi Encabezado</h1>
+
+<nav th:replace="~{fragments/navbar :: nav}"></nav>
+
+<div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+    <div class="card-body">
+        <h5 class="card-title">Exito</h5>
+        <p class="card-text" th:text="${exito}"></p>
+    </div>
+</div>
+
+<div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+    <div class="card-body">
+        <h5 class="card-title">Error</h5>
+        <p class="card-text" th:text="${error}"></p>
+    </div>
+</div>
+
+<header class="header">
+    <section class="contenedorMain">
+        <div class="tituloBiblioteca">
+            <a class="navbar-brand" href="#">BIBLIOTECA EGG</a>
+        </div>
+        <div class="container contenedorLibros">
+            <p class="tituloLibros">Encontrá todos los Libros Aquí!</p>
+        </div>
+        <div class="bg-circle-1 bg-circle"></div>
+        <div class="bg-circle-2 bg-circle"></div>
+        <div class="bg-circle-3 bg-circle"></div>
+        <div class="bg-circle-4 bg-circle"></div>
+    </section>
+</header>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
 </body>
-</html>

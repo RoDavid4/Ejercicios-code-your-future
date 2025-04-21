@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head :: head ('Modificar Artículo')}"></head>
+
+<body>
+<div class="main-container">
+<header class="header-container">
+    <h1>Modificar Artículo </h1>
+    <nav th:replace="~{fragments/navbar :: nav}"></nav>
+</header>
+
+<main>
+    <section class="form-container">
+        <h2>Formulario de Modificación</h2>
+        <form th:action="@{/articulo/modificar/__${articulo.idArticulo}__}" method="POST" enctype="multipart/form-data">
+
+            <label for="nombre"> Nombre del Artículo: </label>
+            <input type="text" id="nombre" name="nombreArticulo" th:placeholder="${articulo.nombreArticulo}" required>
+            <label for="descripcion"> Descripcion del Articulo: </label>
+            <input type="text" id="descripcion" name="descripcionArticulo" th:placeholder="${articulo.descripcionArticulo}" required>
+
+            <input type="file" class="form-control" name="archivo" >
+
+            <select name="fabrica" required>
+                <option> Seleccionar Fabrica </option>
+                <option th:each="fabrica : ${fabricas}"
+                        th:value="${fabrica.idFabrica}"
+                        th:text="${fabrica.nombreFabrica}"
+                >
+
+            </select>
+            <button type="submit" class="btn">Guardar Cambios</button>
+        </form>
+
+        <!-- Mensajes de éxito o error -->
+        <div th:replace="~{fragments/succesorerror :: div}"></div>
+
+    </section>
+    <section class="text-center container">
+        <div class="row mt-3">
+            <div class="divVolver">
+                <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
+</body>
+</html>
