@@ -1,0 +1,72 @@
+
+# 📚 API REST - Gestión de Biblioteca
+
+Proyecto desarrollado con **Java** y **Spring Boot** que implementa una API REST para la gestión básica de una biblioteca. Permite realizar operaciones CRUD sobre libros almacenados en una base de datos relacional.
+
+## 🧩 Funcionalidades principales
+
+- Crear un nuevo libro (`POST /libros`)
+- Consultar todos los libros (`GET /libros`)
+- Consultar libro por ID (`GET /libros/{id}`)
+- Actualizar libro existente (`PUT /libros/{id}`)
+- Eliminar libro (`DELETE /libros/{id}`)
+
+## 🛠️ Tecnologías utilizadas
+
+- **Java 17**
+- **Spring Boot**
+- **Spring Data JPA**
+- **MySQL** (o base embebida para pruebas)
+- **Postman** (para testing de endpoints)
+- **Maven** (gestión de dependencias)
+
+---
+
+## 🧱 Estructura del proyecto
+
+- `Libro` → Clase entidad principal
+- `LibroRepository` → Repositorio JPA para persistencia
+- `LibroService` → Lógica de negocio
+- `LibroController` → Rutas REST y manejo de solicitudes HTTP
+
+## ▶️ Cómo ejecutar el proyecto
+
+1. Cloná el repositorio:
+   ```bash
+   git clone https://github.com/RoDavid4/Ejercicios-code-your-future.git
+````
+
+2. Navegá a la carpeta del proyecto:
+
+   ```bash
+   cd Java/Ejercicios/API_REST/ProyectoBiblioteca
+   ```
+
+3. Asegurate de tener una base de datos corriendo (MySQL, H2, etc.). Configurá los datos de conexión en `application.properties`.
+
+4. Ejecutá la aplicación:
+
+   ```bash
+   mvn spring-boot:run
+   ```
+
+5. Probá los endpoints desde Postman o navegador en:
+
+   ```
+   http://localhost:8080/libros
+   ```
+
+## 🧪 Ejemplo de JSON para crear un libro
+
+```json
+{
+  "titulo": "Cien años de soledad",
+  "autor": "Gabriel García Márquez",
+  "anioPublicacion": 1967
+}
+```
+
+## 👨‍💻 Autor
+
+David Rodríguez
+[LinkedIn](https://www.linkedin.com/in/david-rodr%C3%ADguez-530327222/) | [GitHub](https://github.com/RoDavid4)
